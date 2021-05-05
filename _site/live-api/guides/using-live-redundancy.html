@@ -1,0 +1,1080 @@
+﻿<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Les groupes redondants vous permettent de combiner deux ou plusieurs tâches en un seul flux avec basculement automatique pour une lecture fiable et ininterrompue. Ce guide vous guidera dans la création d'un groupe redondant, l'ajout de tâches et le forçage d'un basculement à l'aide de l'API Live.">
+  
+  <title>Utilisation de la redondance en direct</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">  
+  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
+  <link rel="stylesheet" href="/assets/css/local.css">
+  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
+  <script src="/assets/js/sajari-head.js"></script>
+</head>
+
+<body class="body">
+
+<header>
+  <div class="div-header">
+    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logo du produit" style="max-height: 100px;max-width: 232px;"/></a>
+<!-- GTranslate: https://gtranslate.io/ -->
+<select onchange="doGTranslate(this);"><option value="">Sélectionner la langue</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
+
+<script>
+/* <![CDATA[ */
+function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+/* ]]> */
+</script>
+
+
+
+    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="assistance"/> Contacter le support</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">État<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="état du système"/> du système</a></span> <br/>
+    
+  </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb arr-right">
+      
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      
+      
+      
+      <li class="breadcrumb-item"><a href="/live-api/guides/">Guides</a></li>
+      
+      <li class="breadcrumb-item active" aria-current="page">Utilisation de la redondance en direct</li>
+    </ol>
+  </nav>
+</header>
+<div class="container">
+    <div class="row">
+            <div class="col-sm-3 left-side-bar">
+        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
+          <option value="">Autres documents Brightcove</option>
+          
+            
+              <option value="https://support.brightcove.com">Accueil Documentation</option>
+            
+          
+            
+              <option value="https://audience.support.brightcove.com">Audience de Brightcove</option>
+            
+          
+            
+              <option value="https://beacon.support.brightcove.com">Balise Brightcove</option>
+            
+          
+            
+              <option value="https://campaign.support.brightcove.com">Campagne Brightcove</option>
+            
+          
+            
+              <option value="https://engage.support.brightcove.com">Brightcove Engagez</option>
+            
+          
+            
+              <option value="https://live.support.brightcove.com">Brightcove Live</option>
+            
+          
+            
+              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
+            
+          
+            
+              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
+            
+          
+            
+              <option value="https://social.support.brightcove.com">Brightcove Social</option>
+            
+          
+            
+              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
+            
+          
+            
+              <option value="https://player.support.brightcove.com">Développement du joueur Brightcove</option>
+            
+          
+            
+              <option value="https://apis.support.brightcove.com">API de la plate-forme Video Cloud</option>
+            
+          
+            
+              <option value="https://sdks.support.brightcove.com">SDK pour périphériques Video Cloud</option>
+            
+          
+            
+              <option value="https://integrations.support.brightcove.com">Intégrations et connecteurs CMS</option>
+            
+          
+            
+              <option value="https://general.support.brightcove.com">Informations générales sur Video Cloud</option>
+            
+          
+            
+              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
+            
+          
+        </select>
+
+        <nav class="sidenav" id="side_nav">
+          
+            
+            <h5><a href="/index.html">Accueil</a></h5>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/get-started/index.html">Mise en route <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/get-started/brightcove-live-training-videos.html">Vidéos d'entraînement en direct de Brightcove</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/delivering-live-streams.html">Diffusions en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">Directives et meilleures pratiques sur les modules en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Étape par étape : Utilisation du module Live avec OBS</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">Étape par étape : Utilisation du module Live avec Wirecast</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/general/index.html">Informations générales <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/general/live-drm.html">DRM en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/general/live-platforms-comparison-matrix.html">Matrice de comparaison des plates-formes</a></li>
+                  
+                
+                  
+                    <li><a href="/general/live-video-glossary.html">Glossaire vidéo en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/general/reducing-latency-live-streams.html">Réduction de la latence pour les flux en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/general/supported-encoders-live-events.html">Encodeurs pris en charge pour les événements en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">Utilisation d'Akamai Stream Packaging et Wirecast</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/live-module/index.html">Utilisation du module Live <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Publicités Preroll côté client avec SSAI en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Création et gestion d'événements en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Création d'un clip vidéo</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Organiser la conférence Avaya sur Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hébergez Cisco Webex à Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom hôte vers Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiser un événement INXPO sur Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implémentation des annonces côté serveur</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/live-redundancy.html">Redondance en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/publishing-live-event-facebook.html">Publier un événement en direct sur Facebook</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/publishing-live-event-youtube.html">Publication d'un événement en direct sur YouTube</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/reviewing-live-analytics.html">Consulter Live Analytics</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">Utilisation des sorties RTMP en direct</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/live-api/index.html">Utilisation de l'API Live <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/getting-started/index.html">API en direct : Commencer <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/getting-started/overview-brightcove-live-api.html">Vue d'ensemble : API en direct</a></li>
+                        
+                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Création d'un flux en direct à l'aide de l'API</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/code-samples/index.html">API en direct : Exemples de code <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Créer un travail en direct</a></li>
+                        
+                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Créer une tâche dynamique pour l'entrée MPEG2-TS</a></li>
+                        
+                        <li><a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">Utilisation des sorties RTMP pour les événements en direct</a></li>
+                        
+                        <li><a href="/live-api/code-samples/simulated-live.html">Événement en direct simulé</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/references/index.html">API en direct : Références <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/references/live-api-error-messages.html">Messages d'erreur</a></li>
+                        
+                        <li><a href="/live-api/references/live-api-release-notes.html">Notes de version</a></li>
+                        
+                        <li><a href="/live-api/references/reference.html">Référence de l'API en direct</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/ssai/index.html">API en direct : SSAI <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Points de repère et balises publicitaires avec SSAI</a></li>
+                        
+                        <li><a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Insertion d'annonces côté serveur (SSAI)</a></li>
+                        
+                        <li><a href="/live-api/ssai/overview-player-enhancements-live-ssai.html">Vue d'ensemble : Améliorations du lecteur pour le SSAI en direct</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/guides/index.html">API en direct : Guides <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Brightcove Live Meilleures pratiques</a></li>
+                        
+                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de métadonnées publicitaires Brightcove Live Program</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Création d'un clip précis</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Création de clips VOD</a></li>
+                        
+                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtenir une liste de tâches en direct ou de VOD</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insérer des métadonnées programmées ID3</a></li>
+                        
+                        <li><a href="/live-api/guides/live-drm-live-api.html">DRM en direct via l'API Live</a></li>
+                        
+                        <li><a href="/live-api/guides/managing-credentials-live-api.html">Gestion des informations d'identification pour l'API Live</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-notifications.html">Notifications</a></li>
+                        
+                        <li><a href="/general/reducing-latency-live-streams.html">Réduction de la latence pour les flux en direct</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-rtmp-outputs.html">Sorties RTMP</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-static-entry-points.html">Points d'entrée statiques</a></li>
+                        
+                        <li><a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html">URL signées et authentification des jetons avec un flux en direct</a></li>
+                        
+                        <li><a href="/live-api/guides/using-live-redundancy.html">Utilisation de la redondance en direct</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-vod-live-event.html">VOD de l'événement en direct</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/admin/index.html">Administration des comptes <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Création de profils d'ingest en direct personnalisés</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">Champs pour les profils d'ingest en direct personnalisés</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/managing-live-settings.html">Gestion des paramètres Live</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/managing-api-authentication-credentials.html">Gestion des informations d'identification d'authentification API</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/standard-live-ingest-profiles.html">Profils d'ingestion en direct standard</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/release-notes/index.html">Notes de mise à jour <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/release-notes/live-api-release-notes.html">Notes de version en direct</a></li>
+                  
+                
+                  
+                    <li><a href="/release-notes/known-issues.html">Problèmes connus</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/support/index.html">Support <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    
+                  
+                
+                  
+                    <li><a href="/support/viewing-brightcove-system-status-page.html">Affichage de la page État du système Brightcove</a></li>
+                  
+                
+                  
+                    <li><a href="/support/contact-sales.html">Contacter les ventes</a></li>
+                  
+                
+                  
+                    <li><a href="/support/opening-case-with-brightcove-support.html">Ouverture d'un dossier de support</a></li>
+                  
+                
+              </ul>
+            
+          
+      </nav>
+    </div>
+    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
+  <!-- bootstrap layout -->
+
+<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menu de navigation"/></p>
+
+<!-- search bar -->
+<div id="nav-search-box" style="margin-top: 1rem;"></div>
+<!-- in-page navigation for narrow screens -->
+<details class="centered-inpage-nav" id="centered_inpage_nav">
+  <summary><h6 class="toc">Contenu de la page</h6></summary>
+  <nav id="centered_toc"></nav>
+  <ul id="centered_in_page_toc" class="list-none"></ul>
+</details>
+<!-- open in new tab/window -->
+<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="ouvrir dans un nouvel onglet" style="margin-top:4em;width: 1.5em;"/></a>
+
+
+
+  
+    
+
+
+<h1>Utilisation de la redondance en direct</h1>
+<article class="bcls-article">
+  <summary>Les groupes redondants vous permettent de combiner deux ou plusieurs tâches en un seul flux avec basculement automatique pour une lecture fiable et ininterrompue. Ce guide vous guidera dans la création d'un groupe redondant, l'ajout de tâches et le forçage d'un basculement à l'aide de l'API Live.</summary>
+  <section class="bcls-section">
+    <h2 id="Introduction">Introduction</h2>
+    
+    <p>La fonction de redondance de Brightcove Live permet d'assurer des performances fiables pour vos événements en direct en créant un flux de sauvegarde vers lequel Live basculera automatiquement dans le cas où le premier flux cesse de fonctionner.</p>
+    
+    <p>Notez que toutes les requêtes à l'API Live nécessitent les en-têtes suivants :</p>
+    
+    <table class="bcls-table">
+      <caption class="bcls-caption--table">En-têtes de requête API</caption>
+      <thead class="bcls-table__head">
+        <tr>
+          <th>Clé</th>
+          <th>Montant</th>
+          <th>Remarques</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><code translate="No">X-API-KEY</code></td>
+          <td>{votre clé API}</td>
+          <td>Votre clé aurait dû être fournie lors de l'ouverture de votre compte Brightcove Live</td>
+        </tr>
+        <tr>
+          <td><code translate="No">Content-Type</code></td>
+          <td>application/json</td>
+          <td>Techniquement, l' <code translate="No">content-type</code> en-tête est requis uniquement pour les demandes d'écriture qui incluent un corps de requête, mais ne devrait pas nuire aux demandes de lecture.</td>
+        </tr>
+      </tbody>
+    </table>
+    </section>
+    
+    <section class="bcls-section">
+    <h2 id="Create_your_Live_jobs">Créez vos emplois en direct</h2>
+    
+    <p>Pour la configuration redondante, vous devrez créer 2 ou plusieurs Jobs Brightcove Live. La seule exigence des Jobs est qu'ils soient créés avec le <strong>même</strong> <code translate="No">output</code> réglages. La façon la plus simple d'y parvenir consiste à créer une tâche avec les spécifications de sortie souhaitées, puis à utiliser le <code translate="No">copy_outputs_from_job</code> paramètre pour créer les tâches supplémentaires.</p>
+    
+    <p>Il n'y a aucune restriction quant aux régions où ces emplois peuvent être créés, mais il est recommandé qu'ils soient situés relativement près l'un de l'autre.</p>
+    
+    <p>Une fois les tâches actives créées, maintenez les ID de travail pour plus tard. Le corps de la requête que vous utiliserez pour ajouter ces tâches à un groupe redondant (voir les sections ci-dessous) ressemblera à ceci :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">[
+      {
+        "job_id": "0b76bc73f92f46dc917bbe5061c0c633"
+      },
+      {
+        "job_id": "0ae5a4a71dc54b3181af0f98ee407c27"
+      }
+    ]</code></pre>
+    </section>
+    
+    <section class="bcls-section">
+    <h2 id="Create_the_redundant_group">Créer le groupe redondant</h2>
+    
+    <p>Pour créer un groupe redondant, vous allez soumettre une <code translate="No">POST</code> demande à :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups</code></pre>
+    
+    <p>Voici un exemple de corps de requête :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">{
+      "ad_insertion": true,
+      "processing_regions": ["us-west-2"],
+      "storage_regions": ["us-west-2", "us-east-1"],
+      "label": "Test RG",
+      "live_dvr_sliding_window_duration": 1800
+    }</code></pre>
+    
+    <p>Le tableau ci-dessous contient une liste complète des champs pour le corps de la requête. Dans plusieurs cas, ces champs sont identiques aux champs utilisés pour créer un travail actif. Reportez-vous au <a href="/live-api/references/reference.html">Live API Reference</a> pour plus de détails sur les champs.</p>
+    
+    <table class="bcls-table">
+      <caption class="bcls-caption--table">Créer des champs de groupe redondants</caption>
+      <thead class="bcls-table__head">
+        <tr>
+          <th>Champ</th>
+          <th>Type</th>
+          <th>Obligatoire ?</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><code translate="No">ad_insertion</code></td>
+          <td>booléen</td>
+          <td>optionnel</td>
+          <td>Définir sur true si ce flux doit être activé SSAI</td>
+        </tr>
+        <tr>
+          <td><code translate="No">add_cdns</code></td>
+          <td>Tableau</td>
+          <td>optionnel</td>
+          <td>Tableau de fournisseurs CDN supplémentaires à utiliser pour la génération de manifestes. Pour chaque CDN fourni, le manifeste sera ajouté en conséquence</td>
+        </tr>
+        <tr>
+          <td><code translate="No">drm</code></td>
+          <td>object</td>
+          <td>optionnel</td>
+          <td>Pas encore pris en charge</td>
+        </tr>
+        <tr>
+          <td><code translate="No">encryption</code></td>
+          <td>object</td>
+          <td>optionnel</td>
+          <td>Pas encore pris en charge</td>
+        </tr>
+        <tr>
+          <td><code translate="No">label</code></td>
+          <td>chaîne</td>
+          <td>requis</td>
+          <td>Une étiquette pour identifier le groupe</td>
+        </tr>
+        <tr>
+          <td><code translate="No">live_dvr_sliding_window_duration</code></td>
+          <td>entier</td>
+          <td>optionnel</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code translate="No">notifications</code></td>
+          <td>Tableau</td>
+          <td>optionnel</td>
+          <td>Tableau d'objets ou de chaînes de destination de notification</td>
+        </tr>
+        <tr>
+          <td><code translate="No">processing_regions</code></td>
+          <td>Tableau</td>
+          <td>requis</td>
+          <td>Traitement des régions pour le groupe redondant. Cela permettra de déterminer quelles régions AWS généreront les manifestes. Il est recommandé de faire correspondre storage_regions et les régions dans lesquelles les travaux dynamiques sont créés.</td>
+        </tr>
+        <tr>
+          <td><code translate="No">storage_regions</code></td>
+          <td>Tableau</td>
+          <td>requis</td>
+          <td>Les zones de stockage des morceaux de médias et des listes de lecture seront téléchargés dans S3. Recommandé ceci correspond à processing_regions et aux régions dans lesquelles les travaux en cours sont créés.</td>
+        </tr>
+        <tr>
+          <td><code translate="No">videocloud</code></td>
+          <td>object</td>
+          <td>optionnel</td>
+          <td>Les clients Video Cloud ont la possibilité de créer une vidéo à utiliser pour la diffusion en direct.</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <p>La réponse ressemblera à ceci :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">{
+      "id": "481ff4cf0bf74956bc2ec6e126588080",
+      "processing_regions": [
+          {
+              "region": "us-west-2",
+              "probability": 1
+          }
+      ],
+      "storage_regions": [
+          "us-west-2",
+          "us-east-1"
+      ],
+      "jobs": [],
+      "state": "standby",
+      "label": "Test RG",
+      "live_dvr_sliding_window_duration": 1800,
+      "status": {
+          "us-west-2": null
+      },
+      "ad_insertion": true,
+      "outputs": {
+          "playback_url": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/playlist.m3u8",
+          "playback_url_dvr": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/playlist_dvr.m3u8",
+          "ssai_playback_urls": {
+              "26f8470f61374e608e27af9c1b3f7ff0": {
+                  "playback_url": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/26f8470f61374e608e27af9c1b3f7ff0/playlist_ssaiM.m3u8",
+                  "playback_url_dvr": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/26f8470f61374e608e27af9c1b3f7ff0/playlist_dvr_ssaiM.m3u8",
+                  "description": "House Ads - 864b84f712ae40bca1510a8052b34312",
+                  "type": "ads"
+              }
+      }
+    }</code></pre>
+    </section>
+    <section class="bcls-section">
+      <h2 id="get_redundant_group">Obtenir des groupes redondants</h2>
+      <p>Vous pouvez obtenir tous les groupes redondants en envoyant une <code translate="No">GET</code> demande à :</p>
+      <pre><code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups</code></pre>
+      <p>Vous pouvez filtrer la réponse à l'aide du <code translate="No">state</code> param. Les valeurs autorisées sont les suivantes :</p>
+      <ul>
+        <li><code translate="No">cancelled</code></li>
+        <li><code translate="No">cancelling</code></li>
+        <li><code translate="No">deleting</code></li>
+        <li><code translate="No">disconnected</code></li>
+        <li><code translate="No">failed</code></li>
+        <li><code translate="No">finished</code></li>
+        <li><code translate="No">finishing</code></li>
+        <li><code translate="No">processing</code></li>
+        <li><code translate="No">standby</code></li>
+        <li><code translate="No">waiting</code></li>
+      </ul>
+      <p>Il existe également un <code translate="No">page_size</code> paramètre qui peut être défini sur un entier jusqu'à 1000. La valeur par défaut <code translate="No">page_size</code> est 10.</p>
+      <p>La réponse ressemblera à ceci :</p>
+<pre class="line-numbers"><code class="language-json" translate="No">{
+  "redundant_groups": [
+    {
+      "id": "91c268a6ec5240d79a6004f4ccf0dc6f",
+      "account_id": "a95ac581551b4478b27910e5675db1f8",
+      "user_id": "c2691d4d039040be96c190a949d754a7",
+      "processing_regions": [
+        {
+          "region": "us-west-2",
+          "probability": 1
+        }
+      ],
+      "storage_regions": [
+        "us-west-2",
+        "us-east-1"
+      ],
+      "jobs": [],
+      "state": "standby",
+      "created_at": 1594316624287,
+      "updated_at": 1594316624287,
+      "label": "Test Redundant Group",
+      "live_dvr_sliding_window_duration": 86400,
+      "status": {
+        "us-west-2": null
+      },
+      "outputs": {
+        "playback_url": "https://bcovlive-a.akamaihd.net/r91c268a6ec5240d79a6004f4ccf0dc6f/us-west-2/NA/playlist.m3u8",
+        "playback_url_dvr": "https://bcovlive-a.akamaihd.net/r91c268a6ec5240d79a6004f4ccf0dc6f/us-west-2/NA/playlist_dvr.m3u8"
+      }
+    },
+    {
+      "id": "279ac36e4b4d48a3abbd3e1f98cd57aa",
+      "account_id": "a95ac581551b4478b27910e5675db1f8",
+      "user_id": "c2691d4d039040be96c190a949d754a7",
+      "processing_regions": [
+        {
+          "region": "us-west-2",
+          "probability": 1
+        }
+      ],
+      "storage_regions": [
+        "us-west-2",
+        "us-east-1"
+      ],
+      "jobs": [],
+      "state": "standby",
+      "created_at": 1594323207015,
+      "updated_at": 1594323207015,
+      "label": "Test Redundant Group2",
+      "live_dvr_sliding_window_duration": 86400,
+      "status": {
+        "us-west-2": null
+      },
+      "outputs": {
+        "playback_url": "https://bcovlive-a.akamaihd.net/r279ac36e4b4d48a3abbd3e1f98cd57aa/us-west-2/NA/playlist.m3u8",
+        "playback_url_dvr": "https://bcovlive-a.akamaihd.net/r279ac36e4b4d48a3abbd3e1f98cd57aa/us-west-2/NA/playlist_dvr.m3u8"
+      }
+    }
+  ]
+}</code></pre>
+    </section>
+    <section class="bcls-section">
+    <h2 id="Add_live_jobs_to_the_redundant_group">Ajouter des tâches actives au groupe redondant</h2>
+    
+    <p>Après avoir créé un groupe redondant, vous pouvez y ajouter des tâches en envoyant une <code translate="No">POST</code> demande à :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups/{redundant_group_id}/jobs</code></pre>
+    
+    <p>Les identifiants de travail en direct sont spécifiés dans le corps de la requête comme ceci :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">[
+      {
+        "job_id": "0b76bc73f92f46dc917bbe5061c0c633"
+      },
+      {
+        "job_id": "0ae5a4a71dc54b3181af0f98ee407c27"
+      }
+    ]</code></pre>
+    
+    <p>Il y a quelques propriétés facultatives supplémentaires pour les objets job - le tableau suivant présente tous les champs :</p>
+    
+    <table class="bcls-table">
+      <caption class="bcls-caption--table">Ajouter des champs de demande de travaux dynamiques</caption>
+      <thead class="bcls-table__head">
+        <tr>
+          <th>Champ</th>
+          <th>Type</th>
+          <th>Obligatoire ?</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><code translate="No">job_id</code></td>
+          <td>chaîne</td>
+          <td>requis</td>
+          <td>ID de la tâche à ajouter au groupe. Si ni <code translate="No">playlist</code> ou <code translate="No">streams</code> sont spécifiés, tous <code translate="No">outputs</code> sera utilisé.</td>
+        </tr>
+        <tr>
+          <td><code translate="No">playlist</code></td>
+          <td>chaîne</td>
+          <td>optionnel</td>
+          <td>Libellé de la liste de lecture à utiliser comme sorties pour le flux. Si <code translate="No">playlist</code> est défini, <code translate="No">streams</code> <strong>doit</strong> être <em>indéfini</em>.</td>
+        </tr>
+        <tr>
+          <td><code translate="No">streams</code></td>
+          <td>Tableau</td>
+          <td>optionnel</td>
+          <td>Liste des étiquettes de flux à utiliser comme sorties pour le flux. Si <code translate="No">streams</code> est défini, <code translate="No">playlist</code> <strong>doit</strong> être <em>indéfini</em>.</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <p>La réponse réussie pour cette requête retournera simplement l'identifiant de groupe redondant.</p>
+    </section>
+    
+    <section class="bcls-section">
+    <h2 id="Get_Redundant_Group_Status">Obtenir l'état du groupe redondant</h2>
+    
+    <p>Vous pouvez obtenir le statut d'un groupe redondant en envoyant une <code translate="No">GET</code> demande à :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups/{redundant_group_id}</code></pre>
+    
+    <p>La réponse ressemblera à ce qui suit :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">{
+      "id": "481ff4cf0bf74956bc2ec6e126588080",
+      "processing_regions": [
+          {
+              "region": "us-west-2",
+              "probability": 1
+          }
+      ],
+      "storage_regions": [
+          "us-west-2",
+          "us-east-1"
+      ],
+      "jobs": [
+          {
+              "job_id": "0b76bc73f92f46dc917bbe5061c0c633",
+              "streams": [
+                  "hls720p",
+                  "hls540p",
+                  "hls360p"
+              ],
+              "state": "processing"
+          },
+          {
+              "job_id": "0ae5a4a71dc54b3181af0f98ee407c27",
+              "streams": [
+                  "hls720p",
+                  "hls540p",
+                  "hls360p"
+              ],
+              "state": "processing"
+          }
+      ],
+      "state": "processing",
+      "created_at": 1568057414849,
+      "updated_at": 1568059153017,
+      "label": "Test RG",
+      "live_dvr_sliding_window_duration": 1800,
+      "status": {
+          "us-west-2": {
+              "SwitchDrift": 0,
+              "Ended": false,
+              "OnAir": "0b76bc73f92f46dc917bbe5061c0c633",
+              "Mode": "auto",
+              "InManifest": true,
+              "MediaSequence": 10,
+              "Healthiness": 0,
+              "Duration": 4,
+              "DiscontinuitySequence": 1,
+              "SourceChunk": {
+                  "MediaSequence": 3639,
+                  "Duration": 4,
+                  "DiscontinuitySequence": 0,
+                  "ProgramDateTime": "2019-09-09T19:59:36Z",
+                  "LiveJobID": "0b76bc73f92f46dc917bbe5061c0c633"
+              },
+              "UpdatedAt": "2019-09-09T19:59:46Z",
+              "ProgramDateTime": "2019-09-09T19:59:36Z"
+          }
+      },
+      "ad_insertion": true,
+      "outputs": {
+          "playback_url": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/playlist.m3u8",
+          "playback_url_dvr": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/playlist_dvr.m3u8",
+          "ssai_playback_urls": {
+              "26f8470f61374e608e27af9c1b3f7ff0": {
+                  "playback_url": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/26f8470f61374e608e27af9c1b3f7ff0/playlist_ssaiM.m3u8",
+                  "playback_url_dvr": "https://playback-qa.a-live.io/r481ff4cf0bf74956bc2ec6e126588080/us-west-2/NA/26f8470f61374e608e27af9c1b3f7ff0/playlist_dvr_ssaiM.m3u8",
+                  "description": "House Ads - 864b84f712ae40bca1510a8052b34312",
+                  "type": "ads"
+              }
+          }
+      }
+    }</code></pre>
+    
+    <p>Chaque région de traitement du groupe redondant aura son propre <code translate="No">status</code> objet, clé par région. Vous pouvez voir dans cet exemple que dans la région <code translate="No">us_west_2</code> de traitement, le <code translate="No">on_air</code> travail est <code translate="No">0b76bc73f92f46dc917bbe5061c0c633</code>.</p>
+    
+    <p>En guise de note secondaire, l' <code translate="No">probability</code> associé à la région de traitement sera toujours à ce stade <code translate="No">1</code> , mais est inclus dans le modèle de données pour les améliorations futures qui permettront à plusieurs régions de traitement avec des probabilités entre 0 et 1, ce qui représente le pourcentage approximatif du trafic de lecture qui utilisera cette région.</p>
+    </section>
+    
+    <section class="bcls-section">
+    <h2 id="add_cuepoints">Ajout manuel de points de cueillage</h2>
+    
+    <p>L'ajout manuel de points de cueillage à un flux en direct avec redondance est très similaire à l'ajout de points de cueillage à un flux en direct ordinaire. Pour ce faire pour un groupe redondant, <code translate="No">POST</code> demandez :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups/{redundant_group_id}/cuepoint</code></pre>
+    
+    <p>Inclure un corps de requête comme suit :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">{
+      "ad_server_data": {
+        "subject": "wildlife"
+      },
+      "duration": 30,
+      "timecode": "09:23:18:05"
+    }</code></pre>
+    
+    <p>Si vous omettez le <code translate="No">timecode</code> champ, le point de cueille sera inséré immédiatement.</p>
+    </section>
+    
+    <section class="bcls-section">
+    <h2 id="Force_a_Job_failover">Forcer un basculement sur incident</h2>
+    
+    <p>Le basculement est géré automatiquement par le système Brightcove Live et ne nécessite aucune intervention de votre part. Si pour une raison quelconque vous voulez forcer le basculement vers une autre tâche, cependant, la façon la plus simple de le faire est simplement d'arrêter l'encodeur de la <code translate="No">on_air</code> tâche.</p>
+    
+    <p>Vous pouvez également forcer le basculement à l'aide de l'API en faisant une <code translate="No">PUT</code> requête à :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups/{redundant_group_id}/switch</code></pre>
+    
+    <p>Le corps de la requête ressemble à ceci :</p>
+    
+    <pre class="line-numbers">
+    <code class="language-json" translate="No">{
+      "mode": "manual",
+      "on_air": "0ae5a4a71dc54b3181af0f98ee407c27"
+    }</code></pre>
+    
+    <p>Ici, <code translate="No">mode</code> sera soit <code translate="No">manual</code> soit <code translate="No">auto</code> (la valeur par défaut), et le <code translate="No">on_air</code> aura une valeur de l'un des <strong>ID de tâche secondaire</strong> .</p>
+    
+    <p>Remarque : Une fois en <code translate="No">manual</code> mode, le basculement automatique des tâches <strong>ne se produira pas</strong> . Vous <strong>devez</strong> rétablir le mode <code translate="No">auto</code> pour que le basculement automatique reprenne. Vous pouvez modifier la tâche On-Air sans passer au manuel en omettant le mode du corps et en ajoutant le paramètre de requête de force <code translate="No">?force=true</code> à votre requête. Cela forcera le service à changer de tâches, mais il peut revenir en arrière à tout moment s'il détecte des problèmes.</p>
+    </section>
+    
+    <section class="bcls-section">
+    <h2 id="Ending_a_redundant_stream">Fin d'un flux redondant</h2>
+    
+    <p>Il existe deux façons de mettre fin à votre flux redondant. Par conception, les groupes redondants sont implicitement des flux <a href="/live-api/guides/live-api-static-entry-points.html">SEP</a> . Vous pouvez mettre un groupe redondant en <code translate="No">STANDBY</code> mode en supprimant tous les travaux du groupe redondant.</p>
+    
+    <p>Pour ce faire en utilisant une <code translate="No">DELETE</code> requête pour :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups/{redundant_group_id}/jobs/{job_id}</code></pre>
+    
+    <p>pour chaque tâche que vous souhaitez supprimer. Notez que pour supprimer la tâche actuellement <code translate="No">on_air</code>, vous devrez ajouter le paramètre de <code translate="No">?force-true</code> requête.</p>
+    
+    <p>La deuxième façon de mettre fin au flux est de supprimer complètement le groupe redondant en envoyant une <code translate="No">DELETE</code> requête à :</p>
+    
+    <pre>
+    <code class="language-http" translate="No">https://api.bcovlive.io/v1/redundantgroups/{redundant_group_id}</code></pre>
+    </section>
+    </article>
+    
+    
+<!-- complete bootstrap layout -->
+    </div>
+    <div class="col-sm-2 right-side-bar">
+      
+      <nav class="right-side-nav" id="right_side_nav">
+        <h6 class="toc">Contenu de la page</h6>
+        <ul id="in_page_nav" class="list-none"></ul>
+      </nav>
+      
+    </div>
+  </div>
+</div>
+
+<hr>
+<footer class="bcls-footer" role="contentinfo">  <div class="row">
+    <div class="region region-footer-top-center col-md-12">
+      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
+
+        <h2>Assistance Brightcove</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://status.brightcove.com">État du système</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com/s/login/?">Contacter le support</a>
+          </li>
+          <li>
+            <a href="https://support.brightcove.com/">Documentation</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
+
+        <h2>Formation</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">Cours en ligne</a>
+          </li>
+          <li>
+            <a href="https://studio.support.brightcove.com/training/register-training.html">S' inscrire à un cours</a>
+          </li>
+          <li>
+            <a href="https://university.brightcove.com/">Université de Brightcove</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
+
+        <h2>Brightcove</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://www.brightcove.com">BrightCove.com</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com/s/login/?">Contactez-nous</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="region region-footer-bottom-center col-md-12">
+      <div class="bcls-copyright footer-menu">
+        <table>
+          <tr>
+            <td>
+              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove, Inc. Tous droits réservés.</div>
+            </td>
+            <td><a href="https://www.brightcove.com/en/legal/privacy">Confidentialité</a> | <a href="https://www.brightcove.com/en/terms-and-conditions">Termes et conditions</a></td>
+            <td>
+              <div class="gf-links-cols footer-menu">
+                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+      
+  var searchBox = sajari.init({
+    mode: "search-box",
+    project: "1588255093746585379", // Set this to your project.
+    collection: "brightcove-documenation", // Set this to your collection.
+    instantPipeline: "autocomplete", // Pipeline used as you type
+    inputPlaceholder: "Search", // Input element placeholder
+    maxSuggestions: 5, // Maximum number of suggestions to show
+    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+  });
+  
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+      window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+
+</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/js/sites_nav.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="/assets/js/feedback.js"></script>
+  
+  <script src="/assets/js/sajari-search-foot.js"></script>
+  
+  <!-- <script src="/assets/js/sajari-index.js"></script> -->
+  <style>
+    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
+      background-color: lightblue;
+    }
+    div.sj-tabs__tab {
+      margin-top: 3rem;
+      margin-left: .3rem;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+      background-color:#e8e8e8;
+    }
+
+    div.sj-tabs__tab.sj-tabs__tab--selected {
+      border-bottom-color: crimson;
+      background-color: #f8f8f8;
+    }
+
+    p.sj-results__result__description.css-p9jvyt {
+      font-size: 1rem;
+    }
+
+    .sj-result__text.css-31l7gp h3 {
+      color: navy;
+      font-size: 1.4rem;
+    }
+    </style>
+
+</body>
+
+</html>
