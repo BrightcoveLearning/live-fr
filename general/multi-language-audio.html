@@ -1,0 +1,81 @@
+---
+title: Audio multilingue
+parent: General Information
+layout: staging
+---
+
+<article class="bcls-article">
+  <h1>Audio multilingue</h1>
+  <summary>Cette fonction permet d'acquérir plusieurs langues audio, des pistes d'expérience audio descriptives ou ambiantes pour être disponibles pour la lecture en direct.</summary>
+  <section class="bcls-section">
+
+    <h2 id="Prerequisites">Prérequis :</h2>
+    <ul>
+        <li>Définir le <strong>PID (identificateur de paquet)</strong> pour chaque piste audio de votre encodeur.</li>
+        <li>Pour le moment, seul le format d'entrée RTP est pris en charge. Pour que cette section soit activée dans le <strong>Créer un événement en direct</strong> page, allez à la <strong>OPTIONS AVANCÉES</strong> section et sélectionnez <strong>Protocole de transport en temps réel (RTP)</strong> sous le <strong>Format d'entrée</strong> sélecteur. </li>
+        <li>Dans le <strong>Liste blanche CIDR</strong> section, entrez l'IP : <strong>0.0.0.0/0 </strong> pour vous connecter au point de terminaison RTP. Le bouton multilingue sera désactivé si le format d'entrée n'est pas défini sur RTP. </li>
+
+
+        <aside class="bcls-aside bcls-aside--information">Notes : 
+            <ul>
+            
+            <li>Pour plus d'informations sur la définition du <strong>PID (Packet Identifier)</strong>, pour les pistes audio, reportez-vous à la documentation de votre Encoder. </li>
+            <li>La prise en charge de SRT sera ajoutée dans un proche avenir.</li>
+            <li>Pour plus d'informations sur la configuration d'une entrée RTP, veuillez visiter le <a href="https://live.support.brightcove.com/live-module/creating-and-managing-live-events-using-live-module.html#advanced" target="_blank">Configuration de la documentation des options avancées</a>.
+            </li>
+        </ul>
+        
+        </aside>
+    </ul>
+
+
+    </section>
+    <section class="bcls-section">
+
+        <h2 id="add-audio">Ajout de pistes audio à un événement en direct </h2>
+
+        <p>Lors de la création d'un nouvel événement Live :</p>
+
+    <ol class="bcls-tasklist-restart">
+
+        <li>Ouvrez le <strong>Pistes audio</strong> section.</li>
+        <li>Clique le <strong>Ajouter des pistes audio</strong> bouton.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/multi-language-audio/audio-track-section.png" /></figure>
+
+        </li>
+        <li>Remplissez les champs pour ajouter une nouvelle piste audio. Les champs marqués d'un astérisque (*) sont obligatoires.
+         <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/multi-language-audio/audio-track-fields.png" /></figure>
+            <ul>
+                <li><strong>Par défaut</strong>: Sélectionnez la piste audio par défaut.</li>
+                <li><strong>Langue*</strong>: Tapez le code de langue de la nouvelle piste audio. Exemple : en, es, Cy-GB, etc.</li>
+                <li><strong>PID*</strong>: Entrez le code PID précédemment défini dans votre encodeur pour synchroniser les pistes audio de votre flux entrant dans la langue et la variante appropriées. Note : Des PID uniques sont requis pour chaque piste audio. </li>
+                <li><strong>Variante</strong>: Représente la variante de la piste audio. Ceux-ci peuvent être : <strong>principal, commentaire, alternatif, légende, sous-titre, supplémentaire, dub</strong>. </li>
+                <li><strong>Étiquette</strong>: Tapez un nom pour la piste. Exemple : Anglais, espagnol, etc. Notez que si le champ d'étiquette est laissé vide, le code de langue sera utilisé comme étiquette.</li>
+            </ul>
+        </li>
+        <li>En cliquant sur le <strong>+</strong> et <strong>-</strong> boutons, vous pouvez ajouter ou supprimer des pistes audio. <aside class="bcls-aside bcls-aside--information">Note : Vous pouvez ajouter jusqu'à six pistes audio. S'il est nécessaire d'ajouter d'autres pistes, veuillez contacter le support technique.</aside>
+        
+        </li>
+    
+    </ol>
+
+    </section>
+
+    <section class="bcls-section">
+
+        <h2 id="change-audio">Changement de piste audio</h2>
+
+        <ol class="bcls-tasklist-restart">
+            <li>Si les pistes multi-audio ont été correctement configurées, le lecteur aura une icône de casque qui peut être utilisée pour basculer entre les pistes.
+
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/multi-language-audio/player-multi-language.png" /></figure>
+
+            </li>
+
+        </ol>
+
+        </section>
+
+
+
+</article>

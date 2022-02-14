@@ -1,454 +1,10 @@
-﻿<!doctype html>
-<html lang="fr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  
-  <title>Implémentation des annonces côté serveur dans le module Live</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logo du produit" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Sélectionner la langue</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
-</script>
-
-
-
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="assistance"/> Contacter le support</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">État<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="état du système"/> du système</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      
-      
-      
-      <li class="breadcrumb-item"><a href="/live-module/">Module Live</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">Implémentation des annonces côté serveur dans le module Live</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Autres documents Brightcove</option>
-          
-            
-              <option value="https://support.brightcove.com">Accueil Documentation</option>
-            
-          
-            
-              <option value="https://audience.support.brightcove.com">Audience de Brightcove</option>
-            
-          
-            
-              <option value="https://beacon.support.brightcove.com">Balise Brightcove</option>
-            
-          
-            
-              <option value="https://campaign.support.brightcove.com">Campagne Brightcove</option>
-            
-          
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engagez</option>
-            
-          
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
-          
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
-          
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
-          
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
-          
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
-          
-            
-              <option value="https://player.support.brightcove.com">Développement du joueur Brightcove</option>
-            
-          
-            
-              <option value="https://apis.support.brightcove.com">API de la plate-forme Video Cloud</option>
-            
-          
-            
-              <option value="https://sdks.support.brightcove.com">SDK pour périphériques Video Cloud</option>
-            
-          
-            
-              <option value="https://integrations.support.brightcove.com">Intégrations et connecteurs CMS</option>
-            
-          
-            
-              <option value="https://general.support.brightcove.com">Informations générales sur Video Cloud</option>
-            
-          
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
-          
-        </select>
-
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Accueil</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Mise en route <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vidéos d'entraînement en direct de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Diffusions en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">Directives et meilleures pratiques sur les modules en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Étape par étape : Utilisation du module Live avec OBS</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">Étape par étape : Utilisation du module Live avec Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Informations générales <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/general/live-drm.html">DRM en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/live-platforms-comparison-matrix.html">Matrice de comparaison des plates-formes</a></li>
-                  
-                
-                  
-                    <li><a href="/general/live-video-glossary.html">Glossaire vidéo en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/reducing-latency-live-streams.html">Réduction de la latence pour les flux en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/supported-encoders-live-events.html">Encodeurs pris en charge pour les événements en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">Utilisation d'Akamai Stream Packaging et Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/live-module/index.html">Utilisation du module Live <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Publicités Preroll côté client avec SSAI en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Création et gestion d'événements en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Création d'un clip vidéo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Organiser la conférence Avaya sur Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hébergez Cisco Webex à Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom hôte vers Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiser un événement INXPO sur Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implémentation des annonces côté serveur</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/live-redundancy.html">Redondance en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/publishing-live-event-facebook.html">Publier un événement en direct sur Facebook</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/publishing-live-event-youtube.html">Publication d'un événement en direct sur YouTube</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/reviewing-live-analytics.html">Consulter Live Analytics</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">Utilisation des sorties RTMP en direct</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/live-api/index.html">Utilisation de l'API Live <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/getting-started/index.html">API en direct : Commencer <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/getting-started/overview-brightcove-live-api.html">Vue d'ensemble : API en direct</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Création d'un flux en direct à l'aide de l'API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/code-samples/index.html">API en direct : Exemples de code <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Créer un travail en direct</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Créer une tâche dynamique pour l'entrée MPEG2-TS</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">Utilisation des sorties RTMP pour les événements en direct</a></li>
-                        
-                        <li><a href="/live-api/code-samples/simulated-live.html">Événement en direct simulé</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/references/index.html">API en direct : Références <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Messages d'erreur</a></li>
-                        
-                        <li><a href="/live-api/references/live-api-release-notes.html">Notes de version</a></li>
-                        
-                        <li><a href="/live-api/references/reference.html">Référence de l'API en direct</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/ssai/index.html">API en direct : SSAI <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Points de repère et balises publicitaires avec SSAI</a></li>
-                        
-                        <li><a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Insertion d'annonces côté serveur (SSAI)</a></li>
-                        
-                        <li><a href="/live-api/ssai/overview-player-enhancements-live-ssai.html">Vue d'ensemble : Améliorations du lecteur pour le SSAI en direct</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/guides/index.html">API en direct : Guides <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Brightcove Live Meilleures pratiques</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de métadonnées publicitaires Brightcove Live Program</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Création d'un clip précis</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Création de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtenir une liste de tâches en direct ou de VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insérer des métadonnées programmées ID3</a></li>
-                        
-                        <li><a href="/live-api/guides/live-drm-live-api.html">DRM en direct via l'API Live</a></li>
-                        
-                        <li><a href="/live-api/guides/managing-credentials-live-api.html">Gestion des informations d'identification pour l'API Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-notifications.html">Notifications</a></li>
-                        
-                        <li><a href="/general/reducing-latency-live-streams.html">Réduction de la latence pour les flux en direct</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-rtmp-outputs.html">Sorties RTMP</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-static-entry-points.html">Points d'entrée statiques</a></li>
-                        
-                        <li><a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html">URL signées et authentification des jetons avec un flux en direct</a></li>
-                        
-                        <li><a href="/live-api/guides/using-live-redundancy.html">Utilisation de la redondance en direct</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-vod-live-event.html">VOD de l'événement en direct</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administration des comptes <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Création de profils d'ingest en direct personnalisés</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">Champs pour les profils d'ingest en direct personnalisés</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/managing-live-settings.html">Gestion des paramètres Live</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/managing-api-authentication-credentials.html">Gestion des informations d'identification d'authentification API</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/standard-live-ingest-profiles.html">Profils d'ingestion en direct standard</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/release-notes/index.html">Notes de mise à jour <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/release-notes/live-api-release-notes.html">Notes de version en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/release-notes/known-issues.html">Problèmes connus</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/support/index.html">Support <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li><a href="/support/viewing-brightcove-system-status-page.html">Affichage de la page État du système Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacter les ventes</a></li>
-                  
-                
-                  
-                    <li><a href="/support/opening-case-with-brightcove-support.html">Ouverture d'un dossier de support</a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menu de navigation"/></p>
-
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenu de la page</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="ouvrir dans un nouvel onglet" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
+---
+title: Implémentation des publicités côté serveur dans le module en direct (SSAI)
+parent: Live Module
+---
 
 <article class="bcls-article">
-  <h1>Implémentation des annonces côté serveur dans le module Live</h1>
+  <h1>Implémentation d'annonces côté serveur dans le module Live</h1>
   <summary>Dans cette rubrique, vous apprendrez comment implémenter la publicité côté serveur dans le module Live.</summary>
   <section class="bcls-section">
 
@@ -462,7 +18,12 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	<li>Vous pouvez configurer&nbsp;des<a href="#fill_slate">ardoises</a>&nbsp;de remplissage pour remplir toute heure publicitaire inutilisée</li>
 </ul>
 
-<aside class="bcls-aside bcls-aside--information">Avant de pouvoir utiliser SSAI, votre compte Video Cloud doit être configuré pour la livraison dynamique et activé pour SSAI. Contactez votre représentant pour plus d’informations.</aside>
+<aside class="bcls-aside bcls-aside--information">
+  <ul>
+    <li>Avant de pouvoir utiliser SSAI, votre compte Video Cloud doit être configuré pour la livraison dynamique et activé pour SSAI. Contactez votre gestionnaire de compte pour plus de détails.</li>
+  </ul>
+
+</aside>
 
 <p>Cette rubrique se concentre sur les paramètres requis et le processus de demande d'une annonce côté serveur lors d'un événement en direct.</p>
 </section>
@@ -472,9 +33,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <p>Avant de pouvoir diffuser des annonces côté serveur, les paramètres des annonces côté serveur doivent être configurés. Les paramètres des annonces côté serveur définissent divers aspects de la lecture des annonces, notamment les appels publicitaires, le timing, les balises et d'autres options de configuration des annonces. Ces paramètres sont configurés dans le cadre des paramètres des annonces côté serveur dans le module Admin. Dans cet exemple, une balise d'annonce simple est définie.</p>
 
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-live-ad-config.png"/></figure>
+<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-live-ad-config.png" width="600" height="900" /></figure>
 
-<p>Pour plus d'informations, reportez-vous à la section <a href="https://studio.support.brightcove.com/admin/configuring-server-side-ad-settings.html">Configuration des paramètres publicitaires côté serveur</a>.</p>
+<p>Pour plus d'informations, consultez <a href="https://studio.support.brightcove.com/admin/configuring-server-side-ad-settings.html">Configuration des paramètres d'annonce côté serveur</a>.</p>
 </section>
 
 <section class="bcls-section">
@@ -482,7 +43,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <p>Les ardoises de remplissage sont des vidéos qui seront affichées lorsqu'il y a des lacunes dans un saut de diffusion en direct qui ne peuvent pas être comblées avec une annonce diffusée dynamiquement. Si l'annonce demandée est plus courte que le temps de pause, l'ardoise de remplissage sera affichée afin que les spectateurs ne voient pas de lecteur vide. Vous devez configurer au moins une ardoise de remplissage avant de demander une annonce côté serveur. Les ardoises publicitaires sont configurées dans le cadre des paramètres Live dans le module Admin. Dans cet exemple, une ardoise de remplissage affichant le logo Brightcove a été définie.</p>
 
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-fill-slate.png"/></figure>
+<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-fill-slate.png" /></figure>
 
 <p>Pour plus d'informations sur la création d'ardoises publicitaires, consultez <a href="/admin/managing-live-settings.html">Gestion des paramètres Live</a>.</p>
 </section>
@@ -492,7 +53,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <p>Pour qu'un événement en direct affiche des annonces côté serveur, le paramètre <strong>Activer l'insertion d'annonces côté serveur (SSAI)</strong> doit être sélectionné lors de la création de l'événement. Pour plus d'informations sur la création d'un événement en direct à l'aide du module Live, reportez-vous à la section <a href="/live-module/creating-and-managing-live-events-using-live-module.html">Création et gestion d'événements en direct à l'aide du module Live</a>.</p>
 
-<aside class="bcls-aside bcls-aside--information">Vous devez avoir configuré les paramètres d'annonce côté serveur et ajouté au moins une ardoise de remplissage avant de créer un événement.</aside>
+<aside class="bcls-aside bcls-aside--information">Vous devez avoir configuré les paramètres d'annonce côté serveur et ajouté au moins une liste de remplissage avant de créer un événement.</aside>
 
 <p>Pour créer un nouvel événement en direct prenant en charge les annonces côté serveur, procédez comme suit.</p>
 
@@ -504,24 +65,22 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	<li>Cochez <strong>Activer l'insertion d'annonces côté serveur (SSAI)</strong>. Cela permettra l'insertion d'annonces côté serveur.</li>
 	<li>Sélectionnez une <strong>ardoise de remplissage</strong>. L'ardoise de remplissage s'affiche lorsqu'il y a des lacunes dans un saut de diffusion en direct qui ne peuvent pas être remplies avec une annonce diffusée dynamiquement.</li>
 	<li>Lorsque le paramètre <strong>Audio publicitaire</strong> est coché, les niveaux audio des annonces sont normalisés en fonction de l'ajustement défini. Cela peut être utilisé comme un moyen de s'assurer que les annonces ne sont pas significativement plus fortes que le contenu. Brightcove recommande de sélectionner cette option.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-event-ssai-settings.png"/></figure>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-event-ssai-settings.png" width="600" height="900" /></figure>
 	</li>
 	<li>Cliquez sur <strong>Créer un événement</strong>.</li>
-	<li>le&nbsp;Page de la salle de contrôle&nbsp;s'ouvrira avec des détails sur l'événement en direct, y compris le&nbsp;<strong>Point de terminaison de streaming (URL RTMP)</strong>&nbsp;et&nbsp;<strong>Nom du flux</strong>. Ces valeurs seront utilisées par l'encodeur.</li>
+	<li>La page&nbsp;Control Room&nbsp;s'ouvre avec des détails sur l'événement en direct, y compris le point de terminaison de&nbsp;<strong>streaming (URL RTMP)</strong>&nbsp;et&nbsp;<strong>Nom du flux</strong>. Ces valeurs seront utilisées par l'encodeur.</li>
 	<li>Configurez l'encodeur et démarrez le flux en direct.</li>
 	<li>Par défaut, &nbsp;le lecteur d'aperçu de la salle de contrôle affiche le flux sans publicité. Les annonces ne seront pas affichées dans la salle de contrôle sauf si une configuration d'annonce en direct est sélectionnée. Utilisez la liste déroulante ci-dessous pour sélectionner une configuration d'annonce.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-select-ad-config.png"/></figure>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-select-ad-config.png" /></figure>
 	</li>
-	<li><strong>( Facultatif)</strong> Cliquez sur le bouton plus (<img alt="" src="/assets/images/general/18753/node18753-plus-icon.png"/>) pour sélectionner une configuration d'annonce supplémentaire. Cette opération ajoutera un autre lecteur de prévisualisation sur la page de la salle de contrôle.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-two-preview-players.png"/></figure>
+	<li><strong>(Optionnel)</strong> Cliquez sur le bouton plus (<img alt="" src="/assets/images/general/18753/node18753-plus-icon.png" width="15" height="15" />) pour sélectionner une configuration publicitaire supplémentaire. Cette opération ajoutera un autre lecteur de prévisualisation sur la page de la salle de contrôle.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-two-preview-players.png" /></figure>
 	</li>
 </ol>
 
 <p>Cliquez sur le bouton de volume situé sous le lecteur de prévisualisation pour contrôler quel flux audio du lecteur est actif.</p>
 
-<aside class="bcls-aside bcls-aside--information">Si l'événement utilise des sorties RTMP, les annonces ne seront pas diffusées en continu vers la sortie RTMP. Le flux sans publicité sera diffusé à la place.</aside>
-
-<aside class="bcls-aside bcls-aside--information">Si l'événement est utilisé par la fonctionnalité <a href="/live-module/publishing-live-event-facebook.html">Live to Facebook</a> du module Social, les annonces ne seront pas diffusées sur Facebook. Le flux sans publicité sera diffusé à la place.</aside>
+<aside class="bcls-aside bcls-aside--information">Si l'événement utilise des sorties RTMP, les publicités ne seront pas diffusées sur la sortie RTMP. Le flux sans publicité sera diffusé en continu.</aside> <aside class="bcls-aside bcls-aside--information">Si l'événement est utilisé par le <a href="/live-module/publishing-live-event-facebook.html">En direct sur Facebook</a> fonctionnalité dans le module Social, les publicités ne seront pas diffusées sur Facebook. Le flux sans publicité sera diffusé en continu.</aside>
 </section>
 
 <section class="bcls-section">
@@ -529,11 +88,11 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <p>Pour demander une annonce, cliquez sur<strong> Goto Ad</strong>. Lorsque vous cliquez dessus, la durée du saut d'annonce peut être sélectionnée.</p>
 
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-goto-ad.png"/></figure>
+<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-goto-ad.png" width="500" height="800" /></figure>
 
-<p>Cliquez sur <strong>Insérer</strong> pour insérer un saut d'annonce dans le flux en direct. Si l'annonce ne remplit pas la totalité du temps de pause publicitaire, l'ardoise de remplissage (sélectionnée lors de la création de l'événement) s'affiche. Les annonces seront affichées dans le lecteur d'aperçu de la salle de contrôle et dans les lecteurs publiés à l'aide du module Live. Cet exemple montre comment afficher 2 annonces dans la salle de contrôle .</p>
+<p>Cliquez sur <strong>Insérer</strong> pour insérer un saut d'annonce dans le flux en direct. Si l'annonce ne remplit pas la totalité du temps de pause publicitaire, l'ardoise de remplissage (sélectionnée lors de la création de l'événement) s'affiche. Les annonces seront affichées dans le lecteur d'aperçu de la salle de contrôle et dans les lecteurs publiés à l'aide du module Live. Cet exemple montre comment afficher 2 annonces dans la Control Room.</p>
 
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-two-ad-preview.png"/></figure>
+<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-two-ad-preview.png" /></figure>
 </section>
 
 <section class="bcls-section">
@@ -546,12 +105,11 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 <ol class="bcls-tasklist-restart">
 	<li>Cliquez sur un événement pour ouvrir la page Salle de contrôle.</li>
 	<li>Cliquez sur<strong> Publier et intégrer</strong> dans la navigation de gauche.</li>
-	<li>Sélectionnez un <strong>joueur disponible</strong>.
-	<aside class="bcls-aside bcls-aside--information">Si l'événement est configuré pour activer les annonces côté serveur (SSAI), DVR ou Multi-CDN, Brightcove Player version 6.18.3 et supérieure doit être utilisé. Seuls les joueurs de la version 6.18.3 et des versions supérieures apparaîtront dans la liste déroulante.</aside>
+	<li>Sélectionnez un <strong>joueur disponible</strong>. <aside class="bcls-aside bcls-aside--information">Si l'événement est configuré pour activer les publicités côté serveur (SSAI), DVR ou multi-CDN, Brightcove Player version 6.18.3 et supérieure doit être utilisé. Seuls les joueurs de la version 6.18.3 et supérieure apparaîtront dans la liste déroulante.</aside>
 	</li>
 	<li>Sélectionnez la <strong>configuration de l'annonce</strong> à utiliser avec le lecteur. La configuration de l'annonce déterminera quelle (s) annonce (s) apparaîtra (s) dans le lecteur.</li>
 	<li>Cliquez sur l' <strong>URL du lecteur</strong> pour prévisualiser l'événement dans un navigateur ou copier le code d'intégration approprié à utiliser.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-publish.png"/></figure>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-publish.png" /></figure>
 	</li>
 </ol>
 </section>
@@ -567,9 +125,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	</li>
 	<li>
     <p>Si vous connaissez la valeur de votre identifiant de configuration d'annonce, vous pouvez l'insérer dans l'URL de la playlist.</p>
-    <p>Dans la <strong>salle de contrôle</strong> du module <strong>Live</strong> , copiez l' <strong>URL de lecture</strong>.</p>
+    <p>Dans la salle de <strong>contrôle du</strong> module <strong>Live</strong>, copiez l'URL de <strong>lecture</strong>.</p>
     <p></p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="URL de lecture" src="/assets/images/live-module/remote/playback-url.png"/>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Playback URL" src="/assets/images/live-module/remote/playback-url.png" />
     <figcaption class="bcls-caption--image">URL de lecture</figcaption>
     </figure>
     <p>Ensuite, insérez l'identifiant de configuration de l'annonce (045f90cfd55187ff6e60c8) que vous souhaitez utiliser à l'URL comme suit :</p>
@@ -584,7 +142,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	</li>
   <li>
     <p>Si vous ne connaissez pas la valeur de votre identifiant de configuration d'annonce, vous pouvez obtenir l'URL complète de la liste de lecture comme suit. Sélectionnez la configuration de l'annonce que vous souhaitez utiliser. </p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Sélectionner la configuration de l'annonce" src="/assets/images/live-module/remote/select-ad-config.png"/>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Select ad config" src="/assets/images/live-module/remote/select-ad-config.png" />
     <figcaption class="bcls-caption--image">Sélectionner la configuration de l'annonce</figcaption>
     </figure>
 	</li>
@@ -593,10 +151,10 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	</li>
   <li>
     <p>Dans la console réseau, recherchez « PlayList_SSAIM ». Copiez l'URL qui se termine par « Playlist_ssaim.m3u8". Vous devrez peut-être actualiser la page et rouvrir l'onglet réseau.</p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Console réseau" src="/assets/images/live-module/remote/network-console.png"/>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Network console" src="/assets/images/live-module/remote/network-console.png" />
     <figcaption class="bcls-caption--image">Console réseau</figcaption>
     </figure>
-    <aside class="bcls-aside bcls-aside--information">Étant donné que l'identifiant de configuration de l'annonce est contenu dans l'URL, votre URL SSAI sera différente selon la configuration d'annonce que vous avez sélectionnée.</aside>
+    <aside class="bcls-aside bcls-aside--information">Étant donné que l'ID de configuration d'annonce est contenu dans l'URL, votre URL SSAI sera différente selon la configuration d'annonce que vous avez sélectionnée.</aside>
     <p>Dans cet exemple, l'URL est :</p>
     <pre>
 <code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/582ea6fafea84bf595f610b8ebbeeda8/playlist_ssaiM.m3u8</code></pre>
@@ -605,15 +163,15 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     <p>
       Dans Studio, accédez au module <strong>Media</strong> et créez une nouvelle ressource distante pointant vers l'URL de la liste de lecture à partir de l'étape précédente. Dans le menu de gauche, sélectionnez <strong>+ Ajouter une vidéo à distance</strong>.
     </p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Ajout de vidéos distantes" src="/assets/images/live-module/remote/add-remote-video.png"/>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Add Remote Video" src="/assets/images/live-module/remote/add-remote-video.png" width="300" height="500"/>
     <figcaption class="bcls-caption--image">Ajout de vidéos distantes</figcaption>
     </figure>
   </li>
   <li>
     <p>
-      Dans le champ <strong>Ajouter une vidéo distante</strong> , entrez un <strong>nom vidéo</strong> et l'URL de la liste de lecture. Cliquez sur le bouton <strong>Enregistrer</strong> .
+      Dans l'option <strong>Ajouter une vidéo à distance,</strong> entrez un nom de <strong>vidéo</strong> et l'URL de la liste de lecture. Sélectionnez le <strong>sauvegarder</strong> bouton.
     </p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Boîte de dialogue Ajouter une vidéo à distance" src="/assets/images/live-module/remote/remote-dialog.png"/>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Add Remote Video dialog" src="/assets/images/live-module/remote/remote-dialog.png" />
     <figcaption class="bcls-caption--image">Boîte de dialogue Ajouter une vidéo à distance</figcaption>
     </figure>
   </li>
@@ -641,158 +199,3 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </ul>
 </section>
 </article>
-
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenu de la page</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-
-        <h2>Assistance Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://status.brightcove.com">État du système</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contacter le support</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentation</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formation</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">Cours en ligne</a>
-          </li>
-          <li>
-            <a href="https://studio.support.brightcove.com/training/register-training.html">S' inscrire à un cours</a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Université de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactez-nous</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove, Inc. Tous droits réservés.</div>
-            </td>
-            <td><a href="https://www.brightcove.com/en/legal/privacy">Confidentialité</a> | <a href="https://www.brightcove.com/en/terms-and-conditions">Termes et conditions</a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-      
-  var searchBox = sajari.init({
-    mode: "search-box",
-    project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
-    instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
-    maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
-  });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
-  
-
-</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
-  <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
-  <script src="/assets/js/feedback.js"></script>
-  
-  <script src="/assets/js/sajari-search-foot.js"></script>
-  
-  <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
-      background-color: lightblue;
-    }
-    div.sj-tabs__tab {
-      margin-top: 3rem;
-      margin-left: .3rem;
-      border-top-left-radius: .4rem;
-      border-top-right-radius: .4rem;
-      background-color:#e8e8e8;
-    }
-
-    div.sj-tabs__tab.sj-tabs__tab--selected {
-      border-bottom-color: crimson;
-      background-color: #f8f8f8;
-    }
-
-    p.sj-results__result__description.css-p9jvyt {
-      font-size: 1rem;
-    }
-
-    .sj-result__text.css-31l7gp h3 {
-      color: navy;
-      font-size: 1.4rem;
-    }
-    </style>
-
-</body>
-
-</html>

@@ -1,0 +1,142 @@
+---
+title: Brightcove Live - Intégration Zoom
+parent: Live Module —
+<article class="bcls-article">
+  <h1>Intégration d'une réunion Zoom dans Brightcove Live</h1>
+  <summary><p>L'intégration de Brightcove Live Zoom vous permet de diffuser facilement des réunions Zoom à l'aide de Brightcove Live.</p></summary>
+
+  <section class="bcls-section">
+    <h2 id="schedule">Conditions préalables</h2>
+    <h3>Sur la place de marché Zoom</h3>
+    <p>L'intégration du zoom avec Brightcove Live est gérée par le <strong>Brightcove Live Connect</strong> app sur la place de marché Zoom. Il s'agit d'une application au niveau du compte destinée à être utilisée par des comptes Zoom au niveau du propriétaire ou de l'administrateur sous licence. Veuillez vous assurer que votre compte Zoom dispose des privilèges appropriés pour prendre en charge l'intégration.</p>
+
+    <h3>Dans Brightcove Video Cloud</h3>
+    <p>Avant de démarrer une intégration, vous devez disposer d'un champ de métadonnées personnalisé pour savoir si un événement est diffusé à partir de Zoom. Cela suivra l'état de l'intégration entre les sessions, c'est-à-dire si un événement est actuellement lié à une réunion Zoom. Pour plus d'informations sur l'ajout du champ de métadonnées personnalisé, veuillez consulter le <a href="https://studio.support.brightcove.com/admin/creating-custom-metadata-fields.html" target="_blank">documentation suivante</a>. </p>
+    <ol class="bcls-tasklist-restart">
+        <li>Aller à <strong>Video Cloud Studio</strong> &gt; <strong>Administrateur</strong> &gt; <strong>Champs vidéo</strong> &gt; <strong>Ajouter un champ personnalisé</strong></li>.
+        <li>Écrire un <strong>Afficher un nom</strong> pour votre champ de métadonnées personnalisé.</li>
+        <li>Pour le <strong>Nom interne</strong> champ, vous devez écrire : <strong>bc_meeting_id</strong>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/general/live-zoom-integration/1-id-meeting-field.png" /></figure>
+        <aside class="bcls-aside bcls-aside--information">N'ajoutez aucun identifiant de zoom externe ni aucune donnée dans le champ personnalisé.</aside>
+
+        </li>
+        <li>Écrire un <strong>La description</strong> pour votre champ de métadonnées personnalisé.</li>
+
+    </ol>
+    <h3>Meilleures pratiques</h3>
+    <p>Pour de meilleurs résultats, veuillez suivre les instructions ci-dessous.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Utilisez le <strong>Démarrer</strong> et <strong>Arrêter</strong> Boutons de diffusion dans la salle de contrôle plutôt que dans le lecteur Zoom hôte.</li>
+      <li>Évitez de diffuser plusieurs réunions Zoom en même temps sous un seul compte.</li>
+    </ol>
+    
+  </section>
+
+  <section class="bcls-section">
+
+    <h2 id="schedule">Créer une réunion Zoom</h2>
+
+  <ol class="bcls-tasklist-restart">
+  <li>Tout d'abord, accédez à votre <a href="https://zoom.us/" target="_blank">Compte Zoom</a> et créez une réunion Zoom. Pour plus d'informations sur la création d'une réunion Zoom, veuillez suivre le <a href="https://support.zoom.us/hc/en-us/articles/201362413-Scheduling-meetings" target="_blank">Documentation Zoom</a>. </li>
+  <li>Dans Zoom, accédez à <strong>Paramètres</strong> &gt; <strong>Réunion (avancé)</strong> &gt; <strong>réunions de diffusion en direct</strong>. </li>
+  <li>Assurez-vous que les paramètres de votre compte Zoom sont <strong>Service de diffusion en direct personnalisé</strong> activée.
+<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/general/live-zoom-integration/2-zoom-service-enabled.png" /></figure>
+
+    </li>
+</ol>
+
+</section>
+
+<section class="bcls-section">
+
+    <h2 id="schedule">Intégration du compte Zoom avec Brightcove Live</h2>
+
+    <p>Pour intégrer un compte Zoom à Brightcove Live, procédez comme suit :</p>
+
+    <ol class="bcls-tasklist-restart">
+        <li>Connectez-vous à Video Cloud Studio.</li>
+        <li>Clique le <strong>Administrateur</strong> bouton dans l'en-tête de navigation.</li>
+        <li>Sélectionnez le <strong>Intégrations</strong> option dans le menu déroulant.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/general/live-zoom-integration/3-Integrations-UI-Admin.png" /></figure>
+        </li>
+        <li>Clique le <strong>Ajouter une intégration</strong> pour lier un ou plusieurs comptes Zoom à Brightcove Video Cloud.</li>
+        <li>Une fenêtre contextuelle demandant l'accès à votre compte Zoom apparaîtra. Clique le <strong>Autoriser</strong> bouton.</li>
+        <li>Fournissez vos informations d'identification Zoom pour intégrer le compte.</li>
+        
+    </ol>
+</section>
+
+<section class="bcls-section">
+
+    <h2 id="schedule">Ajout de l'intégration du zoom à un événement Brightcove Live</h2>
+
+    <p>Pour ajouter l'intégration Zoom à l'événement Brightcove Live, procédez comme suit :</p>
+
+    <ol class="bcls-tasklist-restart">
+    <li>Accédez au <a href="https://studio.brightcove.com/" target="_blank">Module en direct</a> dans Video Cloud.</li>
+    <li>Clique le <strong>Créer un évènement</strong> bouton sur le Live <strong>Gérer les événements</strong> page. Pour obtenir des informations complètes sur la création d'un événement en direct, veuillez consulter le <a href="https://live.support.brightcove.com/live-module/creating-and-managing-live-events-using-live-module.html#create" target="_blank">Création et gestion d'événements en direct à l'aide du module en direct</a> Documentation.</li>
+    <li>Remplissez les détails de l'événement en direct comme d'habitude, jusqu'à ce que vous atteigniez le <strong>Intégrations</strong> section.
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="600" height="500" src="/assets/images/general/live-zoom-integration/4-add_integration_button.png" /></figure>
+
+    </li>
+    <li>Clique le <strong>Ajouter une intégration</strong> bouton.</li>
+    <li>Vous pourrez voir une liste de vos réunions Zoom actives et programmées.</li>
+    <li>Cliquez sur le menu déroulant.</li>
+    <li>Sélectionnez votre réunion. Dans cet exemple, je choisis le <strong>Réunion de documentation de test</strong>.
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="500" height="400" src="/assets/images/general/live-zoom-integration/5-added-integration.png" /></figure>
+    <aside class="bcls-aside bcls-aside--information">Une seule intégration peut être ajoutée à un événement à la fois. Pour effacer l'intégration, cliquez sur le <strong>Supprimer l'intégration</strong> bouton. Si vous souhaitez avoir plusieurs comptes, vous pourrez le faire dans le panneau <a href="https://studio.brightcove.com/products/videocloud/admin/integrations" target="_blank">Admin &gt; Intégrations</a>. </aside>
+    </li>
+    <li>Une fois prêt à créer l'événement en direct, cliquez sur le <strong>Créer un évènement</strong> bouton.
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="200" height="100" src="/assets/images/general/live-zoom-integration/6-create-event-button.png" /></figure>
+
+    </li>
+    <li>Dans la <strong>Control Room</strong>, il y a une option à onglets permettant de diffuser votre réunion depuis Zoom. Si vous préférez ne pas utiliser la source d'intégration, revenez à l'onglet Ingest URL dans la partie supérieure gauche.
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/general/live-zoom-integration/7-control_room.png" /></figure>
+
+    </li>
+    <li>Si votre réunion Zoom a été créée récemment, essayez à nouveau de la synchroniser avec Zoom à l'aide du <strong>Synchroniser</strong> bouton. <aside class="bcls-aside bcls-aside--information">Si votre réunion ne s'affiche toujours pas après la synchronisation, essayez de vérifier que votre réunion est <strong>Programmé</strong> dans Zoom et que vous avez moins de 30 rendez-vous programmés.</aside>
+    </li>
+    <li>Dirigez-vous vers votre <a href="https://zoom.us/meeting" target="_blank">Réunion Zoom</a> Compte.</li>
+    <li>Cliquez sur le bleu <strong>Démarrer</strong> bouton pour démarrer votre réunion.
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/general/live-zoom-integration/8-zoom-start-event.png" /></figure>
+    <aside class="bcls-aside bcls-aside--information">En raison d'une limitation de Zoom, avant de commencer à diffuser la réunion Zoom sur Brightcove Live, la réunion Zoom doit être démarrée.</aside>
+    </li>
+    <li>De retour dans le Brightcove Live <strong>Salle de contrôle</strong> , clique le <strong>Commencer à diffuser</strong> bouton.
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/general/live-zoom-integration/9-start_broadcasting_button.png" /></figure>
+
+    </li>
+    <li>Après la dernière étape, vous pourrez voir votre réunion Zoom dans la salle <strong>de contrôle</strong>. <aside class="bcls-aside bcls-aside--warning">
+        <ul>
+          <li>À tout moment pendant la réunion Zoom, vous pouvez arrêter et redémarrer la diffusion. Cependant, si vous ne diffusez pas activement, l'événement peut expirer si l'intervalle dépasse le temps de reconnexion de l'événement.</li>
+          <li>La diffusion du zoom sur Brightcove sera retardée d'environ 20 secondes.</li>
+          <li>Si la réunion Zoom ne démarre pas la diffusion après 20 secondes, vous pouvez cliquer sur <strong>Arrêter la diffusion</strong> et alors <strong>Commencer à diffuser</strong> de nouveau.</li>
+          <li>Étant donné que le flux Zoom est un service tiers, certaines fonctionnalités avancées de Live peuvent ne pas être prises en charge, y compris SSAI.</li>
+        </ul>
+      </aside>
+    </li>
+    </ol>
+</section>
+<section class="bcls-section">
+  <h2 id="Uninstalling_the_Zoom_Integration">Désinstallation de l'intégration Zoom</h2>
+  <h3>Supprimer l'intégration de Video Cloud</h3>
+  <p>Pour supprimer les intégrations Zoom de votre compte dans Brightcove :</p>
+  <ol class="bcls-tasklist-restart">
+      <li>Connectez-vous à <strong>Video Cloud Studio</strong>.</li>
+      <li>Clique le <strong>Administrateur</strong> bouton dans l'en-tête de navigation.</li>
+      <li>Sélectionnez le <strong>Intégrations</strong> option dans le menu déroulant.</li>
+      <li>Clique le <strong>Poubelle</strong> icône.</li>
+      <li>Lorsqu'on vous demande de confirmer, cliquez sur le <strong>Confirmer</strong> bouton.</li>
+  </ol>
+    <h3>Pour supprimer Brightcove Live Connect de votre compte Zoom</h3>
+    <p>Vous pouvez supprimer complètement le <strong>Connexion en direct de Brightcove</strong> app depuis votre compte Zoom en vous connectant à Zoom :</p>
+    <ol class="bcls-tasklist">
+        <li>Connectez-vous à votre compte Zoom et accédez au <strong>Zoom App Marketplace</strong>.</li>
+        <li>Cliquez sur <strong>Gérer&gt; Applications installées</strong> ou recherchez le <strong>Brightcove</strong> app.</li>
+        <li>Clique le <strong>Brightcove</strong> app.</li>
+        <li>Cliquez sur <strong>Désinstaller</strong>.</li>
+    </ol>
+</section>
+
+
+
+</article>

@@ -1,468 +1,28 @@
-﻿<!doctype html>
-<html lang="fr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  
-  <title>Présentation : API Live Brightcove</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logo du produit" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Sélectionner la langue</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
+---
+title: 'Vue d'ensemble : API Brightcove Live'
+parent: Getting Started 
+grandparent: Live API
+---
+ <h1>Cette page a été déplacée - vous serez dirigé vers le <a href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">nouvel emplacement</a> dans 3 secondes. Veuillez mettre à jour vos signets !</h1>
+<script type="text/javascript">
+var t = setTimeout (function () { window.location.href = 'https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html'; }, 3000) ;
 </script>
-
-
-
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="assistance"/> Contacter le support</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">État<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="état du système"/> du système</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      
-      
-      
-      <li class="breadcrumb-item"><a href="/live-api/getting-started/">Mise en route</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">Présentation : API Live Brightcove</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Autres documents Brightcove</option>
-          
-            
-              <option value="https://support.brightcove.com">Accueil Documentation</option>
-            
-          
-            
-              <option value="https://audience.support.brightcove.com">Audience de Brightcove</option>
-            
-          
-            
-              <option value="https://beacon.support.brightcove.com">Balise Brightcove</option>
-            
-          
-            
-              <option value="https://campaign.support.brightcove.com">Campagne Brightcove</option>
-            
-          
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engagez</option>
-            
-          
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
-          
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
-          
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
-          
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
-          
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
-          
-            
-              <option value="https://player.support.brightcove.com">Développement du joueur Brightcove</option>
-            
-          
-            
-              <option value="https://apis.support.brightcove.com">API de la plate-forme Video Cloud</option>
-            
-          
-            
-              <option value="https://sdks.support.brightcove.com">SDK pour périphériques Video Cloud</option>
-            
-          
-            
-              <option value="https://integrations.support.brightcove.com">Intégrations et connecteurs CMS</option>
-            
-          
-            
-              <option value="https://general.support.brightcove.com">Informations générales sur Video Cloud</option>
-            
-          
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
-          
-        </select>
-
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Accueil</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Mise en route <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vidéos d'entraînement en direct de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Diffusions en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">Directives et meilleures pratiques sur les modules en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Étape par étape : Utilisation du module Live avec OBS</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">Étape par étape : Utilisation du module Live avec Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Informations générales <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/general/live-drm.html">DRM en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/live-platforms-comparison-matrix.html">Matrice de comparaison des plates-formes</a></li>
-                  
-                
-                  
-                    <li><a href="/general/live-video-glossary.html">Glossaire vidéo en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/reducing-latency-live-streams.html">Réduction de la latence pour les flux en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/supported-encoders-live-events.html">Encodeurs pris en charge pour les événements en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">Utilisation d'Akamai Stream Packaging et Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/live-module/index.html">Utilisation du module Live <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Publicités Preroll côté client avec SSAI en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Création et gestion d'événements en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Création d'un clip vidéo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Organiser la conférence Avaya sur Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hébergez Cisco Webex à Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom hôte vers Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiser un événement INXPO sur Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implémentation des annonces côté serveur</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/live-redundancy.html">Redondance en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/publishing-live-event-facebook.html">Publier un événement en direct sur Facebook</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/publishing-live-event-youtube.html">Publication d'un événement en direct sur YouTube</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/reviewing-live-analytics.html">Consulter Live Analytics</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">Utilisation des sorties RTMP en direct</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/live-api/index.html">Utilisation de l'API Live <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/getting-started/index.html">API en direct : Commencer <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/getting-started/overview-brightcove-live-api.html">Vue d'ensemble : API en direct</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Création d'un flux en direct à l'aide de l'API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/code-samples/index.html">API en direct : Exemples de code <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Créer un travail en direct</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Créer une tâche dynamique pour l'entrée MPEG2-TS</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">Utilisation des sorties RTMP pour les événements en direct</a></li>
-                        
-                        <li><a href="/live-api/code-samples/simulated-live.html">Événement en direct simulé</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/references/index.html">API en direct : Références <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Messages d'erreur</a></li>
-                        
-                        <li><a href="/live-api/references/live-api-release-notes.html">Notes de version</a></li>
-                        
-                        <li><a href="/live-api/references/reference.html">Référence de l'API en direct</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/ssai/index.html">API en direct : SSAI <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Points de repère et balises publicitaires avec SSAI</a></li>
-                        
-                        <li><a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Insertion d'annonces côté serveur (SSAI)</a></li>
-                        
-                        <li><a href="/live-api/ssai/overview-player-enhancements-live-ssai.html">Vue d'ensemble : Améliorations du lecteur pour le SSAI en direct</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/guides/index.html">API en direct : Guides <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Brightcove Live Meilleures pratiques</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de métadonnées publicitaires Brightcove Live Program</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Création d'un clip précis</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Création de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtenir une liste de tâches en direct ou de VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insérer des métadonnées programmées ID3</a></li>
-                        
-                        <li><a href="/live-api/guides/live-drm-live-api.html">DRM en direct via l'API Live</a></li>
-                        
-                        <li><a href="/live-api/guides/managing-credentials-live-api.html">Gestion des informations d'identification pour l'API Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-notifications.html">Notifications</a></li>
-                        
-                        <li><a href="/general/reducing-latency-live-streams.html">Réduction de la latence pour les flux en direct</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-rtmp-outputs.html">Sorties RTMP</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-static-entry-points.html">Points d'entrée statiques</a></li>
-                        
-                        <li><a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html">URL signées et authentification des jetons avec un flux en direct</a></li>
-                        
-                        <li><a href="/live-api/guides/using-live-redundancy.html">Utilisation de la redondance en direct</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-vod-live-event.html">VOD de l'événement en direct</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administration des comptes <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Création de profils d'ingest en direct personnalisés</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">Champs pour les profils d'ingest en direct personnalisés</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/managing-live-settings.html">Gestion des paramètres Live</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/managing-api-authentication-credentials.html">Gestion des informations d'identification d'authentification API</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/standard-live-ingest-profiles.html">Profils d'ingestion en direct standard</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/release-notes/index.html">Notes de mise à jour <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/release-notes/live-api-release-notes.html">Notes de version en direct</a></li>
-                  
-                
-                  
-                    <li><a href="/release-notes/known-issues.html">Problèmes connus</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/support/index.html">Support <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li><a href="/support/viewing-brightcove-system-status-page.html">Affichage de la page État du système Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacter les ventes</a></li>
-                  
-                
-                  
-                    <li><a href="/support/opening-case-with-brightcove-support.html">Ouverture d'un dossier de support</a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menu de navigation"/></p>
-
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenu de la page</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="ouvrir dans un nouvel onglet" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
-
 <article class="bcls-article">
-  <h1>Présentation : API Live Brightcove</h1>
+  <h1>Vue d'ensemble : API Live Brightcove</h1>
   <summary>Dans cette vue d'ensemble, vous apprendrez à quoi sert l'API Live et comment l'utiliser. Les rubriques incluses dans ce document incluent les régions et CDN AWS pris en charge, les canaux et les événements en direct, ainsi que l'insertion de métadonnées chronométrées ID3 dans un flux en direct.</summary>
   <section class="bcls-section">
 
     <section class="bcls-section">
       <h2 id="introduction">Introduction</h2>
 
-      <p>L' <span translate="No">Live API</span> est une API basée sur REST qui vous permet de créer et de gérer des événements de streaming en direct. Les fonctionnalités facultatives sont les suivantes :</p>
+      <p>Les <span translate="No">API en direct</span> est une API basée sur REST qui vous permet de créer et de gérer des événements de diffusion en direct. Les fonctionnalités facultatives sont les suivantes :</p>
 
       <ul>
-        <li>Insertion d'annonces côté serveur ( <span translate="No">SSAI</span> )</li>
-        <li><span translate="No">AES-128</span> cryptage</li>
+        <li>Insertion d'annonces côté serveur ( <span translate="No">SSAI</span>)</li>
+        <li><span translate="No">AES-128</span> chiffrement</li>
         <li>Créer des ressources vidéo à la demande à partir de clips extraits du flux en direct</li>
-        <li><span translate="No">DVR</span> capacité</li>
-        <li>Multiples <span translate="No">CDNs</span></li>
+        <li><span translate="No">DVR</span> aptitude</li>
+        <li>Plusieurs <span translate="No">CDN</span></li>
       </ul>
 
       <p>Voir également la <a href="/live-api/references/reference.html">référence de l'API</a>.</p>
@@ -471,7 +31,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     <section class="bcls-section">
       <h2 id="baseURL">URL de base</h2>
 
-      <p>L'URL de base de l' <span translate="No">Live API</span> est :</p>
+      <p>L'URL de base de l'API <span translate="No">Live</span> est la suivante :</p>
 
       <pre>
       <code class="language-http" translate="No">https://api.bcovlive.io
@@ -508,43 +68,43 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <tbody class="bcls-table__body">
           <tr>
             <td >Oregon</td>
-            <td ><span translate="No">us-west-2</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png"/></td>
+            <td ><span translate="No">nous-ouest-2</span></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png" /></td>
           </tr>
           <tr>
             <td >Virginie</td>
-            <td ><span translate="No">us-east-1</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png"/></td>
+            <td ><span translate="No">nous-est-1</span></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png" /></td>
           </tr>
           <tr>
             <td >Tokyo</td>
-            <td ><span translate="No">ap-northeast-1</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png"/></td>
+            <td ><span translate="No">ap-nord-est-1</span></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png" /></td>
           </tr>
           <tr>
             <td >Singapour</td>
-            <td ><span translate="No">ap-southeast-1</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png"/></td>
+            <td ><span translate="No">ap-sud-est-1</span></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png" /></td>
           </tr>
           <tr>
             <td >Sydney</td>
-            <td ><span translate="No">ap-southeast-2</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png"/></td>
+            <td ><span translate="No">ap-sud-est-2</span></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png" /></td>
           </tr>
           <tr>
             <td >Mumbai</td>
-            <td ><span translate="No">ap-south-1</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/x16.png"/></td>
+            <td ><span translate="No">ap-sud-1</span></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/x16.png" /></td>
           </tr>
           <tr>
             <td >Francfort</td>
             <td ><span translate="No">eu-central-1</span></td>
-            <td style="text-align: center;"><img alt="Oui" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png"/></td>
+            <td style="text-align: center;"><img alt="Yes" src="//learning-services-media.brightcove.com/doc-assets/general/images/check16.png" /></td>
           </tr>
           <tr>
             <td >Irlande</td>
-            <td ><span translate="No">eu-west-1</span></td>
-            <td style="text-align: center;"><img alt="Non" src="//learning-services-media.brightcove.com/doc-assets/general/images/x16.png"/></td>
+            <td ><span translate="No">eu-ouest-1</span></td>
+            <td style="text-align: center;"><img alt="No" src="//learning-services-media.brightcove.com/doc-assets/general/images/x16.png" /></td>
           </tr>
         </tbody>
       </table>
@@ -577,7 +137,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
       <p>Vous pouvez également acheter à la fois des heures de diffusion d'événements et des chaînes. Contactez votre responsable de compte pour plus d'informations sur les offres.</p>
 
-      <aside class="bcls-aside bcls-aside--information"><strong>Si vous avez acheté à la fois des heures et des chaînes de diffusion d'événements</strong>, vous devez être conscient des points suivants :
+      <aside class="bcls-aside bcls-aside--information"><strong>Si vous avez acheté à la fois des heures et des chaînes de diffusion d'événements</strong>, vous devez connaître les points suivants :
 
         <ul>
           <li>Par défaut, les travaux en direct sont facturés en fonction des heures de diffusion d'événements.</li>
@@ -601,26 +161,26 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     </section>
 
     <section class="bcls-section">
-      <h2 id="dvr_capability"><span translate="No">DVR</span> capacité</h2>
+      <h2 id="dvr_capability"><span translate="No">DVR</span> aptitude</h2>
 
-      <p>Les flux Brightcove Live ont des <span translate="No">DVR</span> capacités. Pour utiliser cette fonctionnalité, vous devez :</p>
+      <p>Les flux Brightcove Live ont <span translate="No">DVR</span> aptitude. Pour utiliser cette fonctionnalité, vous devez :</p>
 
       <ul>
         <li>Utiliser l' <code translate="No">playback_url_dvr</code> URL pour la lecture</li>
-        <li>Utilisez un joueur qui a <a href="https://player.support.brightcove.com/general/playing-live-streams.html">DVR</span> aptitude</a></li>
+        <li>Utilisez un lecteur qui a <a href="https://player.support.brightcove.com/general/playing-live-streams.html">DVR</span> aptitude</a></li>
       </ul>
 
       <p>La capacité DVR est limitée à 86 400 secondes.</p>
 
-      <p>Le <span translate="No">DVR</span> flux restera disponible pendant 7 jours après la fin de la diffusion en direct.</p>
+      <p>Les <span translate="No">DVR</span> Le flux restera disponible pendant 7 jours après la fin du flux en direct.</p>
     </section>
 
     <section class="bcls-section">
       <h2 id="endpoints">Points de terminaison et opérations</h2>
 
-      <p>Les principales opérations de <span translate="No">Live API</span> sont la création et la gestion de flux en direct, et générer des clips VOD à partir de flux en direct. Ces opérations sont effectuées au moyen de demandes adressées aux terminaux suivants, qui sont expliquées plus en détail dans le reste du document.</p>
+      <p>Les principales opérations de la <span translate="No">API en direct</span> créent et gèrent des flux en direct et génèrent des clips VOD à partir de flux en direct. Ces opérations sont effectuées au moyen de demandes adressées aux terminaux suivants, qui sont expliquées plus en détail dans le reste du document.</p>
 
-      <aside class="bcls-aside bcls-aside--information">Notez que Brightcove Live possède son propre identifiant de compte, distinct de tous les autres identifiants de compte. Dans les opérations de l'API, <code translate="No">account_id</code> fait référence à votre <strong>identifiant de compte Live</strong>.</aside>
+      <aside class="bcls-aside bcls-aside--information">Notez que Brightcove Live a son propre identifiant de compte, distinct de tout autre identifiant de compte. Dans les opérations de l'API, <code translate="No">account_id</code> fait référence à votre identifiant de compte <strong>Live</strong>.</aside>
 
       <h3><a href="#Creating_and_managing_jobs">Création et gestion d'emplois</a></h3>
 
@@ -670,7 +230,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <p>Brightcove Live prend en charge plusieurs protocoles d'entrée. Utilisez le <code translate="No">protocol</code> champ dans le corps de la demande lorsque vous créez le travail pour spécifier celui que vous utiliserez. Les valeurs prises en charge sont :</p>
 
         <ul>
-          <li><code translate="No">rtmp</code> ( la valeur par défaut)</li>
+          <li><code translate="No">rtmp</code>(valeur par défaut)</li>
           <li><code translate="No">rtp</code></li>
           <li><code translate="No">rtp-fec</code></li>
           <li><code translate="No">srt</code></li>
@@ -678,7 +238,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
         <p>Le protocole RTMP est pour la livraison d'un flux au format FLV. Les autres protocoles sont pour la livraison de MPEG2-TS.</p>
 
-        <p>Si vous utilisez <code translate="No">rtp</code>, <code translate="No">rtp-fec</code> ou <code translate="No">srt</code>, vous devez également spécifier un <code translate="No">cidr_whitelist</code>(voir <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Routage interdomaine sans classe</a>).</p>
+        <p>Si tu utilises <code translate="No">rtp</code> , <code translate="No">rtp-fec</code> ou <code translate="No">srt</code> , vous devez également spécifier un <code translate="No">cidr_whitelist</code> (voir <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Routage inter-domaines sans classe</a>).</p>
 
         <p>Si vous utilisez <code translate="No">rtmp</code>, vous pouvez spécifier un <code translate="No">ip_whitelist</code> pour l'entrée à la place, mais cela n'est pas obligatoire.</p>
 
@@ -704,7 +264,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 }</code></pre>
       </section>
 
-      <p>Le <a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html"> <span translate="No">Live API</span> Quick Start</a> vous guide à travers la création d'une tâche en direct et la configuration d'un lecteur Brightcove pour y jouer.</p>
+      <p>Les <a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html"> <span translate="No">API en direct</span> Démarrage rapide</a> vous guide tout au long de la création d'une tâche de diffusion en direct et de la configuration d'un Brightcove Player pour la lire.</p>
 
       <h3 id="List_Live_Jobs">Liste des emplois en direct</h3>
 
@@ -744,7 +304,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     <section class="bcls-section">
       <h2 id="Creating_clips">Création de clips</h2>
 
-      <p>Vous pouvez créer des clips vidéo à la demande à partir d'un flux en direct et les stocker dans un compte Video Cloud, ou les envoyer à un compartiment S3 ou à une adresse FTP. Vous pouvez définir les clips lorsque vous créez le flux en direct ou les créer ultérieurement à l'aide du point de terminaison décrit ci-dessous. Reportez-vous également au guide <a href="/live-api/guides/live-api-creating-vod-clips.html">de création d'éléments</a> .</p>
+      <p>Vous pouvez créer des clips vidéo à la demande à partir d'un flux en direct et les stocker dans un compte Video Cloud, ou les envoyer à un compartiment S3 ou à une adresse FTP. Vous pouvez définir les clips lorsque vous créez le flux en direct ou les créer ultérieurement à l'aide du point de terminaison décrit ci-dessous. Voir aussi le <a href="/live-api/guides/live-api-creating-vod-clips.html">Création d'extraits</a> guider.</p>
 
       <h3 id="Create_VOD_Clip">Créer un clip VOD</h3>
 
@@ -754,7 +314,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
       <p>Les points de début et de fin des clips peuvent être définis en termes de décalages à partir du début du flux ou des horodatages UNIX. Vous trouverez des détails sur les champs du corps de la requête dans la <a href="/live-api/references/reference.html#/Clips/CreateVodClip">référence de l'API</a>.</p>
 
-      <aside class="bcls-aside bcls-aside--information">Notez que les extraits de flux en direct peuvent être créés <strong>jusqu'à 7 jours</strong> après la fin de l'événement.</aside>
+      <aside class="bcls-aside bcls-aside--information">Notez que des clips de flux en direct peuvent être créés pour <strong>jusqu'à 7 jours</strong> après la fin de l'événement.</aside>
 
       <h3>Obtenir une liste de travaux VOD (clip)</h3>
 
@@ -762,11 +322,11 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     </section>
 
     <section class="bcls-section">
-      <h2 id="Managing_SSAI">Gestion <span translate="No">SSAI</span></h2>
+      <h2 id="Managing_SSAI">Gérant <span translate="No">SSAI</span></h2>
 
-      <p>En utilisant l'insertion d'annonces côté serveur ( <span translate="No">SSAI</span>), vous pouvez insérer autant de sauts publicitaires que vous le souhaitez dans votre flux en direct. Vous pouvez également ingérer des ressources en ardoise (clips VOD) pour remplir tout temps publicitaire inutilisé avec un message de retour à droite ou tout ce que vous voulez.</p>
-
-      <p> <span translate="No">SSAI</span> Vous trouverez plus de détails sur la configuration dans <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Insertion d'annonces côté serveur à l'aide de Brightcove <span translate="No">Live API</span> </a> et de l' <a href="/live-api/references/reference.html#api-SSAI">API Reference</a>.</p>
+      <p>À l'aide de l'insertion publicitaire côté serveur ( <span translate="No">SSAI</span>), vous pouvez insérer autant de sauts publicitaires que vous le souhaitez dans votre flux en direct. Vous pouvez également ingérer des ressources en ardoise (clips VOD) pour remplir tout temps publicitaire inutilisé avec un message de retour à droite ou tout ce que vous voulez.</p>
+      <aside class="bcls-aside bcls-aside--information">Actuellement, un <strong>SRT + SSAI</strong> la configuration n'est pas prise en charge sur Brightcove Live. Cependant, il est possible d'insérer SSAI dans un flux SRT avec <strong>SCTE-35</strong> marqueurs envoyés par l'encodeur. Pour savoir comment ajouter des marqueurs <strong>SCTE-35</strong>, veuillez consulter la documentation de votre encodeur.</aside>
+      <p>Plus de détails sur la mise en place <span translate="No">SSAI</span> peuvent être trouvés dans <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Insertion d'annonces côté serveur à l'aide de Brightcove <span translate="No">API en direct</span> </a> et le <a href="/live-api/references/reference.html#api-SSAI">Référence API</a>.</p>
 
       <h3 id="Get_Account_Ad_Configurations">Obtenir les configurations des annonces de compte</h3>
 
@@ -782,7 +342,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <code translate="No"><span class="bcls-highlight">POST</span> https://api.bcovlive.io/v1/ssai/application
         </code></pre>
 
-      <p>Créez une configuration d'annonce qui définit la manière dont les annonces seront récupérées <span translate="No">SSAI</span>. Vous trouverez des détails sur les champs du corps de la requête dans la <a href="/live-api/references/reference.html#/SSAI/CreateAdConfiguration">référence de l'API.</a></p>
+      <p>Créez une configuration d'annonce qui définit comment les annonces seront récupérées pour <span translate="No">SSAI</span>. Vous trouverez des détails sur les champs du corps de la requête dans la <a href="/live-api/references/reference.html#/SSAI/CreateAdConfiguration">référence de l'API.</a></p>
 
       <h3 id="Get_Ad_Configuration">Obtenir la configuration des annonces</h3>
 
@@ -834,9 +394,12 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     <section class="bcls-section">
       <h2 id="captions">Sous-titres</h2>
 
-      <p>Si les sous-titres se trouvent à l'intérieur du signal d'entrée h264 (correctement signalé dans le paquet user_data), elles sont transmises aux sorties h264.</p>
+      <p>Si les légendes se trouvent à l'intérieur du signal d'entrée h264 (correctement signalées dans le paquet user_data), elles sont transmises aux sorties h264.</p>
 
       <p>Si vous utilisez un encodeur en direct élémentaire de diffusion, vous pouvez obtenir des sous-titres de SDI (EIA-608/CEA-608) ou d'autres sources (SCTE-20, SCC, Télétexte, DVB-sub, Ancillary, ARIB, TTML, SCTE-27, STL, SRT, SMI) et les mettre dans le flux h264 que vous nous envoyez. D'autres encodeurs de qualité diffusion peuvent probablement faire la même chose, mais nous ne les avons pas testés formellement.</p>
+
+      <aside class="bcls-aside bcls-aside--information">En tant que limitation actuelle, Safari affichera les contrôles CC pour les flux en direct, même s'il n'y a pas de sous-titres à afficher.</aside>
+
     </section>
 
     <section class="bcls-section">
@@ -878,8 +441,8 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         </li>
         <li>Actuellement, le framerate pour les flux d'entrée est limité à 30 FPS. Si vous souhaitez utiliser une fréquence d'images plus élevée, veuillez contacter le support technique.</li>
         <li>Par défaut, la résolution du flux d'entrée est limitée à 1080p.</li>
-        <li>pendant la déconnexion et la reconnexion, les paramètres du flux doivent rester inchangés. Toute modification du nombre de canaux audio, des résolutions ou des paramètres du codec peut entraîner un comportement imprévu.</li>
-        <li>Bien que vous puissiez ajouter DASH et MP4 pour les sources distantes pour les vidéos Video Cloud, Live prend actuellement en charge <strong translate="No">HLS</strong> uniquement.</li>
+        <li>Lors de la déconnexion et de la reconnexion, les paramètres du flux doivent rester inchangent. Toute modification du nombre de canaux audio, de résolutions ou de paramètres de codec entraînera un comportement imprévisible.</li>
+        <li>Bien que vous puissiez ajouter DASH et MP4 pour les sources distantes pour les vidéos Video Cloud, Live prend actuellement en charge <strong translate="No">HLS</strong> seul.</li>
         <li>Seul l'audio AAC est pris en charge pour les flux d'entrée.</li>
         <li>Un maximum de 5 tâches actives <strong>en attente et non démarrées</strong> est autorisé à tout moment.
           <p>Limitations supplémentaires sur les tâches simultanées :</p>
@@ -893,7 +456,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
           <p>Toutes ces limites peuvent être ajustées au niveau du compte par le support. Contactez votre responsable de compte si vous avez besoin d'une capacité supplémentaire.</p>
         </li>
-        <li>L'adresse « RTMP » renvoyée en tant que <code translate="No">stream_url</code> for Live jobs est un flux Akamai HD Live, pas un flux RTMP FMS existant - elle n'est pas prise en charge par les anciennes versions d'Internet Explorer.</li>
+        <li>L'adresse « RTMP » renvoyée comme <code translate="No">stream_url</code> pour les tâches en direct est un flux Akamai HD Live, et non un flux RTMP FMS hérité - elle n'est pas prise en charge par les anciennes versions d'Internet Explorer.</li>
         <li>Les flux en direct sont distribués via HTTPS, et si votre compte Brightcove n'est pas activé pour HTTPS, le lecteur Brightcove ne parviendra pas à charger le flux en direct. Si votre compte n'a pas la prise en charge HTTPS pour le service d'origine activée, <a href="https://supportportal.brightcove.com/s/login/?language=en_US">contactez le support Brightcove</a> pour obtenir la prise en charge HTTPS pour le service d'origine activée afin d'éviter les problèmes de lecture.</li>
         <li>Lors de l'utilisation d'un rendu transmuxé dans une sortie HLS à débits multiples, <code translate="No">segment_size</code> peut être inclus lors de la transmuxation, mais doit être défini de sorte qu'il s'agit d'un multiple de la <code translate="No">GOP</code> taille du flux d'entrée. Donc, si l'entrée est de 30 ips avec des images clés toutes les 60 images, la <code translate="No">GOP</code> taille est de 2 secondes, et la taille du segment doit être un multiple de 2. Si vous ne le faites pas, les segments de flux seront de tailles différentes.
           <p>Également, <code translate="No">keyframe_interval</code> devrait <strong>ne pas</strong> être spécifié sur toutes les sorties.</p>
@@ -902,157 +465,3 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       </ul>
     </section>
 </article>
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenu de la page</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-
-        <h2>Assistance Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://status.brightcove.com">État du système</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contacter le support</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentation</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formation</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">Cours en ligne</a>
-          </li>
-          <li>
-            <a href="https://studio.support.brightcove.com/training/register-training.html">S' inscrire à un cours</a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Université de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactez-nous</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove, Inc. Tous droits réservés.</div>
-            </td>
-            <td><a href="https://www.brightcove.com/en/legal/privacy">Confidentialité</a> | <a href="https://www.brightcove.com/en/terms-and-conditions">Termes et conditions</a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-      
-  var searchBox = sajari.init({
-    mode: "search-box",
-    project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
-    instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
-    maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
-  });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
-  
-
-</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
-  <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
-  <script src="/assets/js/feedback.js"></script>
-  
-  <script src="/assets/js/sajari-search-foot.js"></script>
-  
-  <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
-      background-color: lightblue;
-    }
-    div.sj-tabs__tab {
-      margin-top: 3rem;
-      margin-left: .3rem;
-      border-top-left-radius: .4rem;
-      border-top-right-radius: .4rem;
-      background-color:#e8e8e8;
-    }
-
-    div.sj-tabs__tab.sj-tabs__tab--selected {
-      border-bottom-color: crimson;
-      background-color: #f8f8f8;
-    }
-
-    p.sj-results__result__description.css-p9jvyt {
-      font-size: 1rem;
-    }
-
-    .sj-result__text.css-31l7gp h3 {
-      color: navy;
-      font-size: 1.4rem;
-    }
-    </style>
-
-</body>
-
-</html>

@@ -1,0 +1,98 @@
+---
+title: Planification d'événements SEP en direct
+parent: Live Module
+---
+
+
+<article class="bcls-article">
+    <h1>Démarrage/arrêt automatique des événements en direct avec points d'entrée statiques</h1>
+    <summary>Cette fonction permet à l'utilisateur de planifier et de gérer l'heure de début et de fin d'un ou de plusieurs événements Live Job. 
+        </summary>
+   
+
+        <section class="bcls-section">
+            <h2 id="schedule">Conditions préalables</h2>
+
+            <p>Afin de planifier des événements, un type d'événement en direct de type SEP (point d'entrée statique) doit être créé.</p>
+
+            <aside class="bcls-aside bcls-aside--information">Actuellement, la planification des groupes redondants n'est pas prise en charge.</aside>
+
+            <h2 id="schedule">Recommandations et bonnes pratiques</h2>
+
+            <p>Pour de meilleurs résultats, veuillez suivre les instructions ci-dessous.</p>
+                <ol class="bcls-tasklist-restart">
+                <li>Six activations en attente peuvent être planifiées à la fois. Si vous en avez besoin, veuillez contacter le service client.</li>
+                <li>Une fois le SEP activé, le temps d'attente maximal par défaut est toujours valide (voir l'API <a href="https://live.support.brightcove.com/live-api/guides/live-api-static-entry-points.html#max_waiting_time" target="_blank">Live : Points d'entrée statiques pour plus d'informations</a>).</li>
+                <li>Notez que les limitations décrites dans le <a href="https://live.support.brightcove.com/live-api/guides/live-api-static-entry-points.html#Limitations" target="_blank">Points d'entrée statiques</a> sont toujours valables.</li>
+                </ol>
+        </section>
+
+        <section class="bcls-section">
+
+            <h2 id="schedule">Panneau de planification dans la salle de contrôle</h2>
+
+            <p>Si un compte Live est activé pour le démarrage / arrêt automatique, un panneau de planification sera disponible dans le coin supérieur droit de la salle de contrôle, sous le lecteur de prévisualisation.</p>
+            <p>Pour utiliser Auto Start/Stop, suivez les instructions ci-dessous :</p>
+
+            <ol class="bcls-tasklist-restart">
+                <li>Dans le module Live, créez un nouvel événement Live avec un point d'entrée statique ou visitez un événement créé précédemment.</li>
+                <li>Dans la <strong>Control Room</strong>, un nouveau panneau nommé Planification va être disponible. Cliquez sur <strong>+ Ajouter un horaire</strong> pour créer une nouvelle activation et désactivation automatiques.
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/add-schedule.png" /></figure>
+
+                </li>
+                <li>Modifiez les dates de début et de fin en fonction de l'activation et de la désactivation souhaitées, respectivement.
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/start-end-dates.png" /></figure>
+                <aside class="bcls-aside bcls-aside--information">Bien que nous n'empêchions pas plusieurs planifications de s'exécuter en même temps, les lignes en conflit seront affichées avec un avertissement. Les calendriers conflictuels risquent d'échouer s'ils ne sont pas traités avant l'heure d'activation. Pour éviter l'avertissement, il suffit de supprimer l'une des lignes ou de régler les heures.</aside>
+                </li>
+                <li>
+                    Pour créer une deuxième planification, cliquez à nouveau sur le <strong>+ Ajouter un horaire</strong> bouton. Les <strong>+ Ajouter un horaire</strong> Le bouton sera automatiquement désactivé lorsque la limite d'activations en attente sera atteinte.
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/more-schedules.png" /></figure>
+
+                </li>
+                <li>Pour supprimer un programme, cliquez sur le <img class="bcls-image--no-border" alt="" width="30" height="30" src="/assets/images/live-module/scheduling/trash-icon.png" /> icône.</li>
+                
+            </ol>
+
+            <aside class="bcls-aside bcls-aside--information">
+
+                <ul>
+
+                    <li>Les événements de planification deviendront jaunes en guise d'avertissement en cas de conflits d'horaires.</li>
+                    <li>Les événements programmés deviendront rouges en cas d'échec de la diffusion pour quelque raison que ce soit.</li>
+                    <li>Les planifications ayant échoué resteront visibles pendant 7 jours. </li>
+
+                </ul>
+
+
+
+            </aside>
+
+
+        </section>
+
+        <section class="bcls-section">
+
+            <h2 id="schedule">Affichage des activations à venir</h2>
+
+            <ol class="bcls-tasklist-restart">
+                
+                <li>Une fois les activations planifiées créées, vous pouvez les afficher dans le <strong>Gérer les événements&gt; Veille </strong> languette. Le prochain à venir <strong>Démarrer</strong> et <strong>Arrêter</strong> les dates sont indiquées sous <strong>A venir</strong> Titre.
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/upcoming-events.png" /></figure>
+                </li>
+                <li>Les <strong>Spectacle</strong> La case de sélection vous permet d'afficher uniquement les événements programmés.
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="300" height="200" src="/assets/images/live-module/scheduling/show-events.png" /></figure>
+                </li>
+                <li>Une fois qu'un événement commence, sera affiché sur le <strong>Vivre</strong> onglet, et le <strong>Démarrer</strong> l'heure sera désactivée.
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/streaming-event.png" /></figure>
+
+                </li>
+            </ol>
+
+
+
+            </section>
+
+
+
+
+</article>
